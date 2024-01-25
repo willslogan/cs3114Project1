@@ -85,8 +85,14 @@ public class Rectangle {
      * @return true if the rectangle intersects with rec, false if not
      */
     public boolean intersect(Rectangle r2) {
-        return false;
-
+        if ((this.xCoordinate < (r2.xCoordinate + r2.width) && 
+            (this.xCoordinate + this.width) > r2.xCoordinate
+            && (this.yCoordinate > (r2.yCoordinate + r2.height))
+            && (this.yCoordinate + this.height) < r2.yCoordinate)) {
+            return true;
+        }
+        else
+            return false;
     }
 
 
