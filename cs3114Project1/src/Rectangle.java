@@ -105,6 +105,19 @@ public class Rectangle {
      *         not
      */
     public boolean equals(Object rec) {
+        if (this == rec) {
+            return true;
+        }
+        if (rec == null) {
+            return false;
+        }
+        if (this.getClass().equals(rec.getClass())) {
+            Rectangle otherRec = (Rectangle)rec;
+            if (this.xCoordinate == otherRec.xCoordinate &&
+                this.yCoordinate == otherRec.yCoordinate) {
+                return true;
+            }
+        }
         return false;
     }
 
