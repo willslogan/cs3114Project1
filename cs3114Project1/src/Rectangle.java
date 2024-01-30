@@ -85,8 +85,8 @@ public class Rectangle {
      * @return true if the rectangle intersects with rec, false if not
      */
     public boolean intersect(Rectangle r2) {
-        if ((this.xCoordinate < (r2.xCoordinate + r2.width) && 
-            (this.xCoordinate + this.width) > r2.xCoordinate
+        if ((this.xCoordinate < (r2.xCoordinate + r2.width) && (this.xCoordinate
+            + this.width) > r2.xCoordinate
             && (this.yCoordinate > (r2.yCoordinate + r2.height))
             && (this.yCoordinate + this.height) < r2.yCoordinate)) {
             return true;
@@ -105,6 +105,30 @@ public class Rectangle {
      *         not
      */
     public boolean equals(Object rec) {
+        if (rec == null) {
+            return false;
+        }
+
+        // Ensure they are the same class
+        if (rec.getClass() != Rectangle.class) {
+            return false;
+        }
+
+        // Quality of life so casting doesn't have to be done every time for
+        // every boolean operation
+        Rectangle otherRectangle = (Rectangle)rec;
+        
+        // If initial xCordinate and width are the same then xCoordinates are the same
+        if (this.getxCoordinate() == otherRectangle.getxCoordinate()) {
+            if (this.getWidth() == otherRectangle.getWidth()) {
+                // If initial yCordinate and height are the same then yCoordinates are the same
+                if(this.getyCoordinate() == otherRectangle.getyCoordinate()) {
+                    if(this.getHeight() == otherRectangle.getHeight()) {
+                        return true;
+                    }
+                }
+            }
+        }
         return false;
     }
 
@@ -117,7 +141,11 @@ public class Rectangle {
      *         rectangle
      */
     public String toString() {
-        return null;
+        int x1 = this.xCoordinate;
+        int x2 = this.xCoordinate + width;
+        int y1 = this.yCoordinate;
+        int y2 = this.yCoordinate + height;
+        return "" + x1 + ", " + x2 + ", " + y1 + ", " + y2;
     }
 
 
@@ -127,6 +155,16 @@ public class Rectangle {
      * @return true if the rectangle has invalid parameters, false if not
      */
     public boolean isInvalid() {
-        return false;
+        // Invalid if height and width are not greater than 0
+        if(this.height <= 0 || this.width <= 0) {
+            return false;
+        }
+        
+        // Invalid if xCoordinate or yCoordinate are less than zero
+        if(this.xCoordinate < 0 || this.yCoordinate < 0) {
+            return false;
+        }
+        
+        return true;
     }
 }
