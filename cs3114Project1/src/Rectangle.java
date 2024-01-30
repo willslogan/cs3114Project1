@@ -105,6 +105,9 @@ public class Rectangle {
      *         not
      */
     public boolean equals(Object rec) {
+        if(rec == this) {
+            return true;
+        }
         if (rec == null) {
             return false;
         }
