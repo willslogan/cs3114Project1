@@ -85,6 +85,7 @@ public class Rectangle {
      * @return true if the rectangle intersects with rec, false if not
      */
     public boolean intersect(Rectangle r2) {
+        //Check if the any points of the rectangle intersect
         if ((this.xCoordinate < (r2.xCoordinate + r2.width) && (this.xCoordinate
             + this.width) > r2.xCoordinate
             && (this.yCoordinate > (r2.yCoordinate + r2.height))
@@ -144,11 +145,11 @@ public class Rectangle {
      *         rectangle
      */
     public String toString() {
-        int x1 = this.xCoordinate;
-        int x2 = this.xCoordinate + width;
-        int y1 = this.yCoordinate;
-        int y2 = this.yCoordinate + height;
-        return "" + x1 + ", " + x2 + ", " + y1 + ", " + y2;
+        int x = this.xCoordinate;
+        int y = this.yCoordinate;
+        int w = this.width;
+        int h = this.height;
+        return "X coordinate: " + x + ", Y coordinate: " + y + ", Width: " + w + ", Height: " + h;
     }
 
 
