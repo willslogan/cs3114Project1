@@ -41,8 +41,7 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
         }
         return lev; // returns a random level
     }
-
-
+    
     /**
      * Searches for the KVPair using the key which is a Comparable object.
      * 
@@ -71,7 +70,24 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     @SuppressWarnings("unchecked")
     public void insert(KVPair<K, V> it) {
-        
+        int newLevel = randomLevel(); // New node's level
+        if (newLevel > head.level) // If new node is deeper
+          adjustHead(newLevel); // adjust the header
+        // Track end of level
+        SkipNode[] update = (SkipNode[])Array.newInstance(SkipList.SkipNode.class,
+            head.level + 1);
+        SkipNode x = head; // Start at header node
+        for (int i = head.level; i >= 0; i--) { // Find insert position
+          while ((x.forward[i] != null) && (x.forward[i].pair.getKey().compareTo(it.getKey()) < 0))
+            x = x.forward[i];
+          update[i] = x; // Track end at level i
+        }
+        x = new SkipNode(it, newLevel);
+        for (int i = 0; i <= newLevel; i++) { // Splice into list
+          x.forward[i] = update[i].forward[i]; // Who x points to
+          update[i].forward[i] = x; // Who points to x
+        }
+        size++; // Increment dictionary size
     }
 
 
@@ -84,7 +100,11 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     @SuppressWarnings("unchecked")
     public void adjustHead(int newLevel) {
-        
+        SkipNode temp = head;
+        head = new SkipNode(null, newLevel);
+        for (int i = 0; i <= temp.level; i++)
+          head.forward[i] = temp.forward[i];
+        head.level = newLevel;
     }
 
 
@@ -119,7 +139,18 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      * Prints out the SkipList in a human readable format to the console.
      */
     public void dump() {
-  
+        SkipNode temp = head;
+        int i = 0;
+        while(temp.forward[0] != null) {
+            String depth = "Node with depth: " + temp.level;
+            String value = "Value null";
+            if(temp.pair.getValue() != null) {
+                value = "(" + temp.pair.getKey() + temp.pair.getValue() + ")";
+            }
+            System.out.println(depth + value);
+            temp = temp.forward[0];
+            i++;
+        }
     }
 
     /**
