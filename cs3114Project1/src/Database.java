@@ -1,4 +1,5 @@
 import java.util.Iterator;
+import java.util.ArrayList;
 
 /**
  * This class is responsible for interfacing between the command processor and
@@ -9,9 +10,10 @@ import java.util.Iterator;
  * Many of these methods will simply call the appropriate version of the
  * SkipList method after some preparation.
  * 
- * Also note that the Database class will have a clearer role in Project2, 
- * where we will have two data structures. The Database class will then determine 
- * which command should be directed to which data structure.  
+ * Also note that the Database class will have a clearer role in Project2,
+ * where we will have two data structures. The Database class will then
+ * determine
+ * which command should be directed to which data structure.
  * 
  * @author CS Staff
  * 
@@ -24,11 +26,11 @@ public class Database {
     // a rectangle object, these are stored in a KVPair,
     // see the KVPair class for more information
     private SkipList<String, Rectangle> list;
-    
-    //This is an Iterator object over the SkipList to loop through it from outside the class.
-    //You will need to define an extra Iterator for the intersections method.
+
+    // This is an Iterator object over the SkipList to loop through it from
+    // outside the class.
+    // You will need to define an extra Iterator for the intersections method.
     private Iterator<KVPair<String, Rectangle>> itr1;
-    
 
     /**
      * The constructor for this class initializes a SkipList object with String
@@ -52,6 +54,17 @@ public class Database {
         // Delegates the decision mostly to SkipList, only
         // writing the correct message to the console from
         // that
+        Rectangle currentRec = pair.getValue();
+        if (currentRec.isInvalid()) {
+            System.out.println("Rectangle rejected: (" + pair.getKey() + " "
+                + currentRec.toString() + ")");
+        }
+
+        else {
+            list.insert(pair);
+            System.out.println("Rectangle inserted: (" + pair.getKey() + " "
+                + currentRec.toString() + ")");
+        }
 
     }
 
@@ -64,7 +77,19 @@ public class Database {
      *            the name of the rectangle to be removed
      */
     public void remove(String name) {
-    
+        // Making temp variable to make life easier
+        Rectangle currentRec = list.remove(name).getValue();
+
+        // Rectangle was found and successfully removed from the list
+        if (list.remove(name) != null) {
+            System.out.println("Rectangle removed: (" + name + " " + currentRec
+                .toString() + ")");
+        }
+
+        // Rectangle with specified rectangle doesn't exist within the list
+        else {
+            System.out.println("Rectangle not removed: " + name);
+        }
 
     }
 
@@ -83,7 +108,29 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
-        
+        Rectangle tempRec = new Rectangle(x, y, w, h);
+        // Case where dimensions given are invalid
+        if (tempRec.isInvalid()) {
+            System.out.println("Rectangle rejected: (" + tempRec.toString()
+                + ")");
+            return;
+        }
+
+        // Making temp variables to make life easier
+        KVPair<String, Rectangle> tempKVPair = list.removeByValue(tempRec);
+        Rectangle currentRec = tempKVPair.getValue();
+
+        // Case where Rectangle is found
+        if (currentRec != null) {
+            System.out.println("Rectangle removed: (" + tempKVPair.getKey()
+                + " " + currentRec.toString() + ")");
+        }
+
+        // Case where rectangle is not found
+        else {
+            System.out.println("Rectangle not found: (" + tempRec.toString()
+                + ")");
+        }
     }
 
 
@@ -103,16 +150,19 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-    	
+        // TODO
     }
 
+
     /**
-     * Prints out all the rectangles that intersect each other. Note that 
-     * it is better not to implement an intersections method in the SkipList class
-     * as the SkipList needs to be agnostic about the fact that it is storing Rectangles. 
+     * Prints out all the rectangles that intersect each other. Note that
+     * it is better not to implement an intersections method in the SkipList
+     * class
+     * as the SkipList needs to be agnostic about the fact that it is storing
+     * Rectangles.
      */
     public void intersections() {
-    	
+        // TODO
     }
 
 
@@ -124,7 +174,21 @@ public class Database {
      *            name of the Rectangle to be searched for
      */
     public void search(String name) {
-        
+        ArrayList<KVPair<String, Rectangle>> results = list.search(name);
+        // List is empty case
+        if (results == null) {
+            System.out.println("Rectangle not found: (" + name + ")");
+        }
+        // List has items in it
+        else {
+            System.out.println("Rectangles Found:");
+            for (int i = 0; i < results.size(); i++) {
+                // temp variable so it less writing
+                Rectangle currentRec = results.get(i).getValue();
+                System.out.println("(" + name + " " + currentRec.toString()
+                    + ")");
+            }
+        }
     }
 
 
@@ -134,7 +198,8 @@ public class Database {
      * will all be delegated to the SkipList.
      */
     public void dump() {
-        
+        System.out.println("SkipList dump:");
+        list.dump();
     }
 
 }
