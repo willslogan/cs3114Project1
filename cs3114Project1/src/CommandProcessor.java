@@ -51,6 +51,15 @@ public class CommandProcessor {
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
             //Calls insert
+            String name = arr[1];   // Store the name of the rectangle we are inserting
+            int x = Integer.parseInt(arr[2]); //Store the x coordinate of the rectangle
+            int y = Integer.parseInt(arr[3]); //Store the y coordinate of the rectangle
+            int w = Integer.parseInt(arr[4]); //Store the width of the rectangle 
+            int h = Integer.parseInt(arr[5]); //Store the height of the rectangle
+            Rectangle rec = new Rectangle(x, y, w, h); //Create instance of the rectangle
+            KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(name, rec);  //Create instance of KVPair that gets added to databse
+            data.insert(pair);  //Insert the rectangle pair
+            
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
@@ -59,33 +68,43 @@ public class CommandProcessor {
             int numParam = arr.length - 1;
             if (numParam == 1) {
                 // Calls remove by name
-                
+                String name = arr[1];   // Store name of rectangle being removed
+                data.remove(name);  // Remove rectangle
             }
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string
                 // integers into their Integer equivalent minus whitespace
-                
+                int x = Integer.parseInt(arr[1]); //Store the x coordinate of the rectangle
+                int y = Integer.parseInt(arr[2]); //Store the y coordinate of the rectangle
+                int w = Integer.parseInt(arr[3]); //Store the width of the rectangle 
+                int h = Integer.parseInt(arr[4]); //Store the height of the rectangle
+                data.remove(x, y, w, h); // Remove the rectangle
             }
             
         }
         else if (command.equals("regionsearch")) {
             // calls the regionsearch method for a set of coordinates
             // the string integers in the line will be trimmed of whitespace
-
+            int x = Integer.parseInt(arr[1]); //Store the x coordinate of the search
+            int y = Integer.parseInt(arr[2]); //Store the y coordinate of the search
+            int w = Integer.parseInt(arr[3]); //Store the width of the search
+            int h = Integer.parseInt(arr[4]); //Store the height of the search
+            data.regionsearch(x, y, w, h); //Search for rectangles with specified parameters
         }
         else if (command.equals("intersections")) {
             // calls the intersections method, no parameters to be passed
             // (see the intersections JavaDoc in the Database class for more information)
-           
+            data.intersections(); 
         }
         else if (command.equals("search")) {
-             // calls the search method for a name of object
-           
+            // calls the search method for a name of object
+            String name = arr[1];   // Store name we are searching for
+            data.search(name);  // Call search function
         }
         else if (command.equals("dump")) {
             // calls the dump method for the database, takes no parameters
             // (see the dump() JavaDoc in the Database class for more information)
-
+            data.dump();
         }
         else {
                 // the first white space delimited string in the line is not
