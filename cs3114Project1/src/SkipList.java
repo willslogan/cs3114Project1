@@ -1,7 +1,7 @@
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.Random;
+import student.TestableRandom;
 
 /**
  * This class implements SkipList data structure and contains an inner SkipNode
@@ -35,7 +35,7 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     int randomLevel() {
         int lev;
-        Random value = new Random();
+        TestableRandom value = new TestableRandom();
         for (lev = 0; Math.abs(value.nextInt()) % 2 == 0; lev++) {
             // Do nothing
         }
@@ -78,7 +78,7 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
             head.level + 1);
         SkipNode x = head; // Start at header node
         for (int i = head.level; i >= 0; i--) { // Find insert position
-          while ((x.forward[i] != null) && (x.forward[i].pair.getKey().compareTo(it.getKey()) < 0))
+          while ((x.forward[i] != null) && (x.forward[i].element().getKey().compareTo(it.getKey()) < 0))
             x = x.forward[i];
           update[i] = x; // Track end at level i
         }
@@ -140,16 +140,14 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     public void dump() {
         SkipNode temp = head;
-        int i = 0;
         while(temp.forward[0] != null) {
             String depth = "Node with depth: " + temp.level;
             String value = "Value null";
             if(temp.pair.getValue() != null) {
-                value = "(" + temp.pair.getKey() + temp.pair.getValue() + ")";
+                value = "(" + temp.element().getKey() + temp.element().getValue() + ")";
             }
             System.out.println(depth + value);
             temp = temp.forward[0];
-            i++;
         }
     }
 

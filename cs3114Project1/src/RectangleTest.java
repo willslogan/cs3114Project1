@@ -44,6 +44,7 @@ public class RectangleTest extends TestCase {
     public void testIntersect() {
         assertFalse(r2.intersect(r4));
         assertTrue(r2.intersect(r5));
+        assertTrue(r2.intersect(r2)); 
     }
     
     @SuppressWarnings("unlikely-arg-type")
