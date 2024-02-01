@@ -86,10 +86,10 @@ public class Rectangle {
      */
     public boolean intersect(Rectangle r2) {
         //Check if the any points of the rectangle intersect
-        if ((this.xCoordinate < (r2.xCoordinate + r2.width) && (this.xCoordinate
-            + this.width) > r2.xCoordinate
-            && (this.yCoordinate > (r2.yCoordinate + r2.height))
-            && (this.yCoordinate + this.height) < r2.yCoordinate)) {
+        if ((this.xCoordinate < (r2.xCoordinate + r2.width) && 
+            (this.xCoordinate + this.width) > r2.xCoordinate
+            && (this.yCoordinate < (r2.yCoordinate + r2.height))
+            && (this.yCoordinate + this.height) > r2.yCoordinate)) {
             return true;
         }
         else
