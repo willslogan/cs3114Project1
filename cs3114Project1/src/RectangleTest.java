@@ -18,7 +18,7 @@ public class RectangleTest extends TestCase {
         r2 = new Rectangle(1, 1, 5, 10);
         r3 = new Rectangle(-1, -5, 15, 20);
         r4 = new Rectangle(20, 20, 10, 10);
-        r5 = new Rectangle(2, 4, 10, 10);
+        r5 = new Rectangle(2, 2, 10, 10);
     }
     
     public void testGetxCoordinate() {
