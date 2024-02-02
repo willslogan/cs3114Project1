@@ -150,7 +150,27 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-        // TODO
+        // Create rectangle with the values of the region search
+        Rectangle tempRec = new Rectangle(x, y, w, h);
+        // Check skiplist for intersections with region and display them
+        if (!tempRec.isInvalid()) // Check if the rectangle region is valid
+        {
+            // Output expecterd header
+            System.out.println("Rectangles intersecting region (" + x + ", " + y
+                + ", " + w + ", " + h + "):");
+            Iterator<KVPair<String, Rectangle>> it = list.iterator();
+            while (it.hasNext()) { // Iterate through entire skiplist
+                if (it.next().getValue().intersect(tempRec)) {
+                    // If the current element intersects the region print it out
+                    System.out.println(it.next().toString());
+                }
+            }
+        }
+        else {
+            // Print out reject statment
+            System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
+                + ", " + h + ")");
+        }
     }
 
 
@@ -162,7 +182,32 @@ public class Database {
      * Rectangles.
      */
     public void intersections() {
-        // TODO
+        // Print header
+        System.out.println("Intersection pairs: ");
+
+        // Create outer iterator for looping
+        Iterator<KVPair<String, Rectangle>> outer = list.iterator();
+        while (outer.hasNext()) {
+            // Create inner iterator for comparing, set it to outer so we don't
+            // have to check the entire list every time and can skip pairs we
+            // already
+            // know intersect
+            Iterator<KVPair<String, Rectangle>> inner = outer;
+            // Set the inner iterator equal to the one after so we don't compare
+            // the same item
+            if (inner.hasNext()) {
+                inner.next();
+            }
+            while (inner.hasNext()) {
+                if (outer.next().getValue().intersect(inner.next()
+                    .getValue())) {
+                    // If the outer and inner intersect print out the
+                    // intersection
+                    System.out.println(outer.next().toString() + " | " + inner
+                        .next().toString());
+                }
+            }
+        }
     }
 
 

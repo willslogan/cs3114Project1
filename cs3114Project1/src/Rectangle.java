@@ -16,6 +16,8 @@ public class Rectangle {
     // the distance from the y coordinate the rectangle spans
     private int height;
 
+    private static final int WORLD_BOX = 1023;
+
     /**
      * Creates an object with the values to the parameters given in the
      * xCoordinate, yCoordinate, width, height
@@ -85,11 +87,11 @@ public class Rectangle {
      * @return true if the rectangle intersects with rec, false if not
      */
     public boolean intersect(Rectangle r2) {
-        //Check if the any points of the rectangle intersect
+        // Check if the any points of the rectangle intersect
         if (!(this.xCoordinate < (r2.xCoordinate + r2.width))) {
             return false;
         }
-        if(!((this.xCoordinate + this.width) > r2.xCoordinate)) {
+        if (!((this.xCoordinate + this.width) > r2.xCoordinate)) {
             return false;
         }
         if (!(this.yCoordinate < (r2.yCoordinate + r2.height))) {
@@ -111,7 +113,7 @@ public class Rectangle {
      *         not
      */
     public boolean equals(Object rec) {
-        if(rec == this) {
+        if (rec == this) {
             return true;
         }
         if (rec == null) {
@@ -126,13 +128,15 @@ public class Rectangle {
         // Quality of life so casting doesn't have to be done every time for
         // every boolean operation
         Rectangle otherRectangle = (Rectangle)rec;
-        
-        // If initial xCordinate and width are the same then xCoordinates are the same
+
+        // If initial xCordinate and width are the same then xCoordinates are
+        // the same
         if (this.getxCoordinate() == otherRectangle.getxCoordinate()) {
             if (this.getWidth() == otherRectangle.getWidth()) {
-                // If initial yCordinate and height are the same then yCoordinates are the same
-                if(this.getyCoordinate() == otherRectangle.getyCoordinate()) {
-                    if(this.getHeight() == otherRectangle.getHeight()) {
+                // If initial yCordinate and height are the same then
+                // yCoordinates are the same
+                if (this.getyCoordinate() == otherRectangle.getyCoordinate()) {
+                    if (this.getHeight() == otherRectangle.getHeight()) {
                         return true;
                     }
                 }
@@ -154,7 +158,8 @@ public class Rectangle {
         int y = this.yCoordinate;
         int w = this.width;
         int h = this.height;
-        return "X coordinate: " + x + ", Y coordinate: " + y + ", Width: " + w + ", Height: " + h;
+        return "X coordinate: " + x + ", Y coordinate: " + y + ", Width: " + w
+            + ", Height: " + h;
     }
 
 
@@ -165,15 +170,21 @@ public class Rectangle {
      */
     public boolean isInvalid() {
         // Invalid if height and width are not greater than 0
-        if(this.height <= 0 || this.width <= 0) {
+        if (this.height <= 0 || this.width <= 0) {
             return true;
         }
-        
+
         // Invalid if xCoordinate or yCoordinate are less than zero
-        if(this.xCoordinate < 0 || this.yCoordinate < 0) {
+        if (this.xCoordinate < 0 || this.yCoordinate < 0) {
             return true;
         }
-        
+
+        // Invalid if perimeter goes beyond world box
+        if ((this.xCoordinate + this.width) > WORLD_BOX || (this.yCoordinate
+            + this.height) > WORLD_BOX) {
+            return true;
+        }
+
         return false;
     }
 }
