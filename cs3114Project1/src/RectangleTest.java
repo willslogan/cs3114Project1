@@ -89,6 +89,7 @@ public class RectangleTest extends TestCase {
         assertFalse(r19.intersect(r20));
         
         assertTrue(r2.intersect(r5));
+        assertTrue(r2.intersect(r2)); 
         assertTrue(r2.intersect(r2));
     }
     
