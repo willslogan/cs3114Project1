@@ -86,14 +86,19 @@ public class Rectangle {
      */
     public boolean intersect(Rectangle r2) {
         //Check if the any points of the rectangle intersect
-        if ((this.xCoordinate < (r2.xCoordinate + r2.width) && 
-            (this.xCoordinate + this.width) > r2.xCoordinate
-            && (this.yCoordinate < (r2.yCoordinate + r2.height))
-            && (this.yCoordinate + this.height) > r2.yCoordinate)) {
-            return true;
-        }
-        else
+        if (!(this.xCoordinate < (r2.xCoordinate + r2.width))) {
             return false;
+        }
+        if(!((this.xCoordinate + this.width) > r2.xCoordinate)) {
+            return false;
+        }
+        if (!(this.yCoordinate < (r2.yCoordinate + r2.height))) {
+            return false;
+        }
+        if (!((this.yCoordinate + this.height) > r2.yCoordinate)) {
+            return false;
+        }
+        return true;
     }
 
 
@@ -161,14 +166,14 @@ public class Rectangle {
     public boolean isInvalid() {
         // Invalid if height and width are not greater than 0
         if(this.height <= 0 || this.width <= 0) {
-            return false;
+            return true;
         }
         
         // Invalid if xCoordinate or yCoordinate are less than zero
         if(this.xCoordinate < 0 || this.yCoordinate < 0) {
-            return false;
+            return true;
         }
         
-        return true;
+        return false;
     }
 }

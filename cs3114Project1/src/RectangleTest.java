@@ -42,8 +42,54 @@ public class RectangleTest extends TestCase {
     }
     
     public void testIntersect() {
-        assertFalse(r2.intersect(r4));
+        Rectangle center = new Rectangle(0, 0, 10, 10);
+        
+        Rectangle r6 = new Rectangle(0, 11, 10, 10);
+        assertFalse(center.intersect(r6));
+        
+        Rectangle r7 = new Rectangle(-10, 0, 5, 5);
+        assertFalse(center.intersect(r7));
+        
+        Rectangle r8 = new Rectangle(0, -10, 5, 5);
+        assertFalse(center.intersect(r8));
+        
+        Rectangle r9 = new Rectangle(11, 0, 10, 10);
+        assertFalse(center.intersect(r9));
+        
+        Rectangle r10 = new Rectangle(6, 1, 5, 5);
+        assertTrue(center.intersect(r10));
+        
+        Rectangle r11 = new Rectangle(1, 6, 5, 5);
+        assertTrue(center.intersect(r11));
+        
+        Rectangle r12 = new Rectangle(-1, 1, 5, 5);
+        assertTrue(center.intersect(r12));
+        
+        Rectangle r13 = new Rectangle(1, -1, 5, 5);
+        assertTrue(center.intersect(r13));
+        
+        Rectangle r14 = new Rectangle(3, 3, 2, 2);
+        assertTrue(center.intersect(r14));
+        
+        Rectangle r15 = new Rectangle(-2, -2, 5, 5);
+        assertTrue(center.intersect(r15));
+        
+        Rectangle r16 = new Rectangle(8, -2, 5, 5);
+        assertTrue(center.intersect(r16));
+        
+        Rectangle r17 = new Rectangle(8, 8, 5, 5);
+        assertTrue(center.intersect(r17));
+        
+        Rectangle r18 = new Rectangle(-2, 8, 5, 5);
+        assertTrue(center.intersect(r18));
+        
+        Rectangle r19 = new Rectangle(5, 0, 10, 0);
+        Rectangle r20 = new Rectangle(20, 0, 0, 0);
+        assertFalse(r20.intersect(r19));
+        assertFalse(r19.intersect(r20));
+        
         assertTrue(r2.intersect(r5));
+        assertTrue(r2.intersect(r2));
     }
     
     @SuppressWarnings("unlikely-arg-type")
@@ -55,6 +101,19 @@ public class RectangleTest extends TestCase {
         Rectangle copy = new Rectangle(0, 0, 0, 0);
         assertTrue(r1.equals(copy));
         
+        Rectangle r6 = new Rectangle(0, 1, 1, 1);
+        assertFalse(r1.equals(r6));
+        Rectangle r7 = new Rectangle(0, 0, 1, 1);
+        assertFalse(r1.equals(r7));
+        Rectangle r8 = new Rectangle(0, 0, 0, 1);
+        assertFalse(r1.equals(r8));
+        Rectangle r9 = new Rectangle(1, 0, 0, 0);
+        assertFalse(r1.equals(r9));
+        Rectangle r10 = new Rectangle(0, 1, 0, 0); 
+        assertFalse(r1.equals(r10));
+        Rectangle r11 = new Rectangle(0, 0, 1, 0); 
+        assertFalse(r1.equals(r11));
+        
     }
     
     public void testToString() {
@@ -64,8 +123,17 @@ public class RectangleTest extends TestCase {
     }
     
     public void testIsInvalid() {
-        assertFalse(r1.isInvalid());
-        assertTrue(r2.isInvalid());
-        assertFalse(r3.isInvalid());
+        assertTrue(r1.isInvalid());
+        Rectangle r6 = new Rectangle(1, 1, -5, 10);
+        Rectangle r7 = new Rectangle(1, 1, 10, 0);
+        assertTrue(r6.isInvalid());
+        assertTrue(r7.isInvalid());
+        Rectangle r8 = new Rectangle(1, -5, 10, 10);
+        Rectangle r9 = new Rectangle(-5, 10, 10, 10);
+        assertTrue(r8.isInvalid());
+        assertTrue(r3.isInvalid());
+        assertTrue(r9.isInvalid());
+        
+        assertFalse(r2.isInvalid());
     }
 }
