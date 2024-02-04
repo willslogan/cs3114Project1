@@ -18,7 +18,7 @@ import student.TestableRandom;
 public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KVPair<K,V>> {
     private SkipNode head; // First element (Sentinel Node)
     private int size; // number of entries in the Skip List
-
+    private TestableRandom random = new TestableRandom(11111111111111l);
     /**
      * Initializes the fields head, size and level
      */
@@ -35,8 +35,7 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     int randomLevel() {
         int lev;
-        TestableRandom value = new TestableRandom();
-        for (lev = 0; Math.abs(value.nextInt()) % 2 == 0; lev++) {
+        for (lev = 0; Math.abs(random.nextInt()) % 2 == 0; lev++) {
             // Do nothing
         }
         return lev; // returns a random level
@@ -140,15 +139,20 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      */
     public void dump() {
         SkipNode temp = head;
-        while(temp.forward[0] != null) {
-            String depth = "Node with depth: " + temp.level;
-            String value = "Value null";
-            if(temp.pair.getValue() != null) {
-                value = "(" + temp.element().getKey() + temp.element().getValue() + ")";
-            }
-            System.out.println(depth + value);
+        System.out.println("Skiplist Dump:");
+        String depth = "Node with depth: " + temp.level;
+        String value = " Value null";
+        System.out.println(depth + value);
+        if(size() >= 1) {
             temp = temp.forward[0];
+            while(temp != null) {
+                depth = "Node with depth: " + temp.level;
+                value = " value (" + temp.element().getKey() + ", " + temp.element().getValue() + ")";
+                System.out.println(depth + value);
+                temp = temp.forward[0];
+            }
         }
+        
     }
 
     /**

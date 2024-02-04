@@ -154,7 +154,7 @@ public class Rectangle {
         int y = this.yCoordinate;
         int w = this.width;
         int h = this.height;
-        return "X coordinate: " + x + ", Y coordinate: " + y + ", Width: " + w + ", Height: " + h;
+        return "" + x + ", " + y + ", " + w + ", " + h;
     }
 
 
