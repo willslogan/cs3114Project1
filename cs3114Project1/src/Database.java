@@ -78,18 +78,19 @@ public class Database {
      */
     public void remove(String name) {
         // Making temp variable to make life easier
-//        KVPair<String, Rectangle> tempKV = list.remove(name);
+// KVPair<String, Rectangle> tempKV = list.remove(name);
 //
-//        // Rectangle was found and successfully removed from the list
-//        if (tempKV != null) {
-//            System.out.println("Rectangle removed: (" + name + " " + tempKV.getValue().toString()
-//                .toString() + ")");
-//        }
+// // Rectangle was found and successfully removed from the list
+// if (tempKV != null) {
+// System.out.println("Rectangle removed: (" + name + " " +
+// tempKV.getValue().toString()
+// .toString() + ")");
+// }
 //
-//        // Rectangle with specified rectangle doesn't exist within the list
-//        else {
-//            System.out.println("Rectangle not removed: " + name);
-//        }
+// // Rectangle with specified rectangle doesn't exist within the list
+// else {
+// System.out.println("Rectangle not removed: " + name);
+// }
 
     }
 
@@ -108,29 +109,29 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
-//        Rectangle tempRec = new Rectangle(x, y, w, h);
-//        // Case where dimensions given are invalid
-//        if (tempRec.isInvalid()) {
-//            System.out.println("Rectangle rejected: (" + tempRec.toString()
-//                + ")");
-//            return;
-//        }
+// Rectangle tempRec = new Rectangle(x, y, w, h);
+// // Case where dimensions given are invalid
+// if (tempRec.isInvalid()) {
+// System.out.println("Rectangle rejected: (" + tempRec.toString()
+// + ")");
+// return;
+// }
 //
-//        // Making temp variables to make life easier
-//        KVPair<String, Rectangle> tempKVPair = list.removeByValue(tempRec);
-//        Rectangle currentRec = tempKVPair.getValue();
+// // Making temp variables to make life easier
+// KVPair<String, Rectangle> tempKVPair = list.removeByValue(tempRec);
+// Rectangle currentRec = tempKVPair.getValue();
 //
-//        // Case where Rectangle is found
-//        if (currentRec != null) {
-//            System.out.println("Rectangle removed: (" + tempKVPair.getKey()
-//                + " " + currentRec.toString() + ")");
-//        }
+// // Case where Rectangle is found
+// if (currentRec != null) {
+// System.out.println("Rectangle removed: (" + tempKVPair.getKey()
+// + " " + currentRec.toString() + ")");
+// }
 //
-//        // Case where rectangle is not found
-//        else {
-//            System.out.println("Rectangle not found: (" + tempRec.toString()
-//                + ")");
-//        }
+// // Case where rectangle is not found
+// else {
+// System.out.println("Rectangle not found: (" + tempRec.toString()
+// + ")");
+// }
     }
 
 
@@ -219,21 +220,21 @@ public class Database {
      *            name of the Rectangle to be searched for
      */
     public void search(String name) {
-//        ArrayList<KVPair<String, Rectangle>> results = list.search(name);
-//        // No rectangle was found with that name
-//        if (results == null) {
-//            System.out.println("Rectangle not found: (" + name + ")");
-//        }
-//        // One or more rectangle was found with name
-//        else {
-//            System.out.println("Rectangles Found:");
-//            for (int i = 0; i < results.size(); i++) {
-//                // temp variable so it less writing
-//                Rectangle currentRec = results.get(i).getValue();
-//                System.out.println("(" + name + " " + currentRec.toString()
-//                    + ")");
-//            }
-//        }
+// ArrayList<KVPair<String, Rectangle>> results = list.search(name);
+// // No rectangle was found with that name
+// if (results == null) {
+// System.out.println("Rectangle not found: (" + name + ")");
+// }
+// // One or more rectangle was found with name
+// else {
+// System.out.println("Rectangles Found:");
+// for (int i = 0; i < results.size(); i++) {
+// // temp variable so it less writing
+// Rectangle currentRec = results.get(i).getValue();
+// System.out.println("(" + name + " " + currentRec.toString()
+// + ")");
+// }
+// }
     }
 
 

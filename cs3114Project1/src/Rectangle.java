@@ -158,8 +158,7 @@ public class Rectangle {
         int y = this.yCoordinate;
         int w = this.width;
         int h = this.height;
-        return "" + x + ", " + y + ", " + w
-            + ", " + h;
+        return "" + x + ", " + y + ", " + w + ", " + h;
     }
 
 
