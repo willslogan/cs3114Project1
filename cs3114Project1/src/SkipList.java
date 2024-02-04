@@ -147,12 +147,12 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
             temp = temp.forward[0];
             while(temp != null) {
                 depth = "Node with depth: " + temp.level;
-                value = " value (" + temp.element().getKey() + ", " + temp.element().getValue() + ")";
+                value = " Value (" + temp.element().getKey() + ", " + temp.element().getValue() + ")";
                 System.out.println(depth + value);
                 temp = temp.forward[0];
             }
         }
-        
+        System.out.println("SkipList size is: " + this.size());
     }
 
     /**
