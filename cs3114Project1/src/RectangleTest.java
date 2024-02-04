@@ -118,9 +118,9 @@ public class RectangleTest extends TestCase {
     }
     
     public void testToString() {
-        assertEquals(r1.toString(), "X coordinate: 0, Y coordinate: 0, Width: 0, Height: 0");
-        assertEquals(r2.toString(), "X coordinate: 1, Y coordinate: 1, Width: 5, Height: 10");
-        assertEquals(r3.toString(), "X coordinate: -1, Y coordinate: -5, Width: 15, Height: 20");
+        assertEquals(r1.toString(), "0, 0, 0, 0");
+        assertEquals(r2.toString(), "1, 1, 5, 10");
+        assertEquals(r3.toString(), "-1, -5, 15, 20");
     }
     
     public void testIsInvalid() {
@@ -134,6 +134,15 @@ public class RectangleTest extends TestCase {
         assertTrue(r8.isInvalid());
         assertTrue(r3.isInvalid());
         assertTrue(r9.isInvalid());
+        
+        Rectangle r10 = new Rectangle (1020, 2, 20, 20);
+        assertTrue(r10.isInvalid());
+        
+        Rectangle r11 = new Rectangle (2, 1020, 20, 20);
+        assertTrue(r11.isInvalid());
+        
+        Rectangle r12 = new Rectangle (1020, 1020, 20, 20);
+        assertTrue(r12.isInvalid());
         
         assertFalse(r2.isInvalid());
     }
