@@ -56,13 +56,13 @@ public class Database {
         // that
         Rectangle currentRec = pair.getValue();
         if (currentRec.isInvalid()) {
-            System.out.println("Rectangle rejected: (" + pair.getKey() + " "
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + currentRec.toString() + ")");
         }
 
         else {
             list.insert(pair);
-            System.out.println("Rectangle inserted: (" + pair.getKey() + " "
+            System.out.println("Rectangle inserted: (" + pair.getKey() + ", "
                 + currentRec.toString() + ")");
         }
 
@@ -78,11 +78,11 @@ public class Database {
      */
     public void remove(String name) {
         // Making temp variable to make life easier
-        Rectangle currentRec = list.remove(name).getValue();
+        KVPair<String, Rectangle> tempKV = list.remove(name);
 
         // Rectangle was found and successfully removed from the list
-        if (list.remove(name) != null) {
-            System.out.println("Rectangle removed: (" + name + " " + currentRec
+        if (tempKV != null) {
+            System.out.println("Rectangle removed: (" + name + " " + tempKV.getValue().toString()
                 .toString() + ")");
         }
 
@@ -160,7 +160,7 @@ public class Database {
                 + ", " + w + ", " + h + "):");
             Iterator<KVPair<String, Rectangle>> it = list.iterator();
             while (it.hasNext()) { // Iterate through entire skiplist
-                if (it.next().getValue().intersect(tempRec)) {
+                if (tempRec.intersect(it.next().getValue())) {
                     // If the current element intersects the region print it out
                     System.out.println(it.next().toString());
                 }
@@ -183,7 +183,7 @@ public class Database {
      */
     public void intersections() {
         // Print header
-        System.out.println("Intersection pairs: ");
+        System.out.println("Intersection pairs:");
 
         // Create outer iterator for looping
         Iterator<KVPair<String, Rectangle>> outer = list.iterator();
@@ -220,11 +220,11 @@ public class Database {
      */
     public void search(String name) {
         ArrayList<KVPair<String, Rectangle>> results = list.search(name);
-        // List is empty case
+        // No rectangle was found with that name
         if (results == null) {
             System.out.println("Rectangle not found: (" + name + ")");
         }
-        // List has items in it
+        // One or more rectangle was found with name
         else {
             System.out.println("Rectangles Found:");
             for (int i = 0; i < results.size(); i++) {
