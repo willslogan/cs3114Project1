@@ -172,18 +172,18 @@ public class Rectangle {
         if (this.height <= 0 || this.width <= 0) {
             return true;
         }
-
         // Invalid if xCoordinate or yCoordinate are less than zero
-        if (this.xCoordinate < 0 || this.yCoordinate < 0) {
+        else if (this.xCoordinate < 0 || this.yCoordinate < 0) {
             return true;
         }
 
         // Invalid if perimeter goes beyond world box
-        if ((this.xCoordinate + this.width) > WORLD_BOX || (this.yCoordinate
+        else if ((this.xCoordinate + this.width) > WORLD_BOX || (this.yCoordinate
             + this.height) > WORLD_BOX) {
             return true;
         }
-
-        return false;
+        else {
+            return false;
+        }
     }
 }
