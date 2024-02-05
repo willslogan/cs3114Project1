@@ -19,7 +19,7 @@ public class SkipList<K extends Comparable<? super K>, V>
     implements Iterable<KVPair<K, V>> {
     private SkipNode head; // First element (Sentinel Node)
     private int size; // number of entries in the Skip List
-    private TestableRandom random = new TestableRandom(11111111111111l);
+    private TestableRandom random = new TestableRandom(11111111111111L);
 
     /**
      * Initializes the fields head, size and level
@@ -49,6 +49,7 @@ public class SkipList<K extends Comparable<? super K>, V>
      * 
      * @param key
      *            key to be searched for
+     * @return KVPair found, null if not
      */
     public ArrayList<KVPair<K, V>> search(K key) {
         return null;
@@ -115,7 +116,7 @@ public class SkipList<K extends Comparable<? super K>, V>
      * Removes the KVPair that is passed in as a parameter and returns true if
      * the pair was valid and false if not.
      * 
-     * @param pair
+     * @param key
      *            the KVPair to be removed
      * @return returns the removed pair if the pair was valid and null if not
      */
@@ -220,7 +221,6 @@ public class SkipList<K extends Comparable<? super K>, V>
          */
         @Override
         public boolean hasNext() {
-            // TODO Auto-generated method stub
             return current.forward[0] != null;
         }
 
@@ -230,7 +230,6 @@ public class SkipList<K extends Comparable<? super K>, V>
          */
         @Override
         public KVPair<K, V> next() {
-            // TODO Auto-generated method stub
             KVPair<K, V> elem = current.forward[0].element();
             current = current.forward[0];
             return elem;
@@ -243,7 +242,6 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     @Override
     public Iterator<KVPair<K, V>> iterator() {
-        // TODO Auto-generated method stub
         return new SkipListIterator();
     }
 

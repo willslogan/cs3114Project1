@@ -78,6 +78,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Test Intersections method
+     */
     public void testIntersections() {
         list.intersections();
         assertEquals(systemOut().getHistory(), "Intersection pairs:\n");
