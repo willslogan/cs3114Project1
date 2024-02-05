@@ -19,6 +19,9 @@ public class CommandProcessorTest extends TestCase {
     private String dump;
     private String unrecognized;
 
+    /**
+     * Set up variables used in testing
+     */
     public void setUp() {
         cmdProc = new CommandProcessor();
         insert = "insert a 1 0 2 4";
@@ -32,6 +35,9 @@ public class CommandProcessorTest extends TestCase {
     }
 
 
+    /**
+     * Test that all branches are reached in the processor function
+     */
     public void testProcessor() {
         cmdProc.processor(insert);
 

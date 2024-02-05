@@ -16,6 +16,9 @@ public class RectangleTest extends TestCase {
     private Rectangle r5;
     private Rectangle rnull; // Leave null
 
+    /**
+     * Set up variables used in testing
+     */
     public void setUp() {
         r1 = new Rectangle(0, 0, 0, 0);
         r2 = new Rectangle(1, 1, 5, 10);
@@ -25,30 +28,45 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Test that the correct x coordinate is returned
+     */
     public void testGetxCoordinate() {
         assertEquals(0, r1.getxCoordinate());
         assertEquals(1, r2.getxCoordinate());
     }
 
 
+    /**
+     * Test that the correct y coordinate is returned
+     */
     public void testGetyCoordinate() {
         assertEquals(0, r1.getyCoordinate());
         assertEquals(1, r2.getyCoordinate());
     }
 
 
+    /**
+     * Test that the correct width is returned
+     */
     public void testGetWidth() {
         assertEquals(0, r1.getWidth());
         assertEquals(5, r2.getWidth());
     }
 
 
+    /**
+     * Test that the correct height is returned
+     */
     public void testGetHeight() {
         assertEquals(0, r1.getHeight());
         assertEquals(10, r2.getHeight());
     }
 
 
+    /**
+     * Test all possible intersections
+     */
     public void testIntersect() {
         Rectangle center = new Rectangle(0, 0, 10, 10);
 
@@ -102,6 +120,9 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Test all possiblities for equals method
+     */
     @SuppressWarnings("unlikely-arg-type")
     public void testEquals() {
         assertTrue(r1.equals(r1));
@@ -127,6 +148,9 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Test that the correct string is returned
+     */
     public void testToString() {
         assertEquals(r1.toString(), "0, 0, 0, 0");
         assertEquals(r2.toString(), "1, 1, 5, 10");
@@ -134,6 +158,9 @@ public class RectangleTest extends TestCase {
     }
 
 
+    /**
+     * Test that the invalid method correctly marks rectangles
+     */
     public void testIsInvalid() {
         assertTrue(r1.isInvalid());
         Rectangle r6 = new Rectangle(1, 1, -5, 10);

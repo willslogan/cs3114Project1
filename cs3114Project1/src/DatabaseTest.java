@@ -17,6 +17,9 @@ public class DatabaseTest extends TestCase {
     private KVPair<String, Rectangle> p2;
     private Database list2;
 
+    /**
+     * Set up variables used in testing
+     */
     public void setUp() {
         list = new Database();
         r1 = new Rectangle(1, 0, 2, 4);
@@ -28,8 +31,10 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Test that the insert method works
+     */
     public void testInsert() {
-        ;
         list.insert(p1);
         list.insert(p2);
         assertEquals(systemOut().getHistory(),
@@ -48,6 +53,9 @@ public class DatabaseTest extends TestCase {
 // }
 
 
+    /**
+     * Test that region search works
+     */
     public void testRegionSearch() {
         list.regionsearch(1, 1, -1, -5);
         assertEquals(systemOut().getHistory(),
@@ -94,6 +102,9 @@ public class DatabaseTest extends TestCase {
 // }
 
 
+    /**
+     * Test that dump works
+     */
     public void testDump() {
 
         list.dump();
