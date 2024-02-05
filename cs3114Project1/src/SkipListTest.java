@@ -1,13 +1,17 @@
 import java.lang.reflect.Array;
 import student.TestCase;
-import student.TestableRandom;
 
+/**
+ * Test class for Skiplist
+ */
 public class SkipListTest extends TestCase {
     private SkipList<String, Rectangle> test1 = null;
     private Rectangle[] rec;
-    private Rectangle rnull; // Leave null
     private KVPair<String, Rectangle>[] listRecs;
 
+    /**
+     * Sets up values for testing skiplist
+     */
     @SuppressWarnings("unchecked")
     public void setUp() {
         test1 = new SkipList<String, Rectangle>();
@@ -35,6 +39,9 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Tests Skiplists insert function
+     */
     public void testInsert() {
         test1.insert(listRecs[0]);
         assertEquals(1, test1.size());
@@ -59,19 +66,22 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Tests Skiplists dump function
+     */
     public void testDump() {
-// 4
-// 0
-// 5
-// 1
-// 4
-// 0
-// 1
-// 4
-// 0
+        // levels from seed
+        // 4
+        // 0
+        // 5
+        // 1
+        // 4
+        // 0
+        // 1
+        // 4
+        // 0
         test1.dump();
-        assertFuzzyEquals("SkipList dump:"
-            + "\nNode with depth 0, Value null",
+        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 0, Value null",
             systemOut().getHistory());
         systemOut().clearHistory();
         test1.insert(listRecs[0]);
@@ -81,6 +91,9 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 4, Value null"
             + "\nNode with depth 4, Value (r1, 0, 0, 0, 0)",
             systemOut().getHistory());
+        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 4, Value null"
+            + "\nNode with depth 4, Value (r1, 0, 0, 0, 0)", systemOut()
+                .getHistory());
         systemOut().clearHistory();
         test1.insert(listRecs[1]);
         test1.dump();
@@ -110,9 +123,6 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
             + "\nNode with depth 1, Value (r3, -1, -5, 15, 20)",
             systemOut().getHistory());
-        
-        
-
     }
 
 }
