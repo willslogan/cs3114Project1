@@ -42,15 +42,29 @@ public class DatabaseTest extends TestCase {
                 + "Rectangle rejected: (b, -1, -1, 2, 4)\n");
     }
 
-// public void testRemove() {
-// /* list.insert(p1);
-// list.remove("a");
-// list.remove("b");
-// assertEquals(systemOut().getHistory(), "Rectangle inserted: (a, 1, 0, 2,
-// 4)\n" + "Rectangle removed: (a, 1, 0, 2, 4)\n" + "Rectangle not removed:
-// b\n");
-// */
-// }
+
+    public void testRemove() {
+
+//        list.insert(p1);
+//        list.remove("a");
+//        list.remove("b");
+//        assertEquals(systemOut().getHistory(),
+//            "Rectangle inserted: (a, 1, 0, 2, 4)\n"
+//                + "Rectangle removed: (a, 1, 0, 2, 4)\n"
+//                + "Rectangle not removed: b\n");
+        list.remove(-1, -1, 0, 0);
+        assertFuzzyEquals("Rectangle rejected: (-1, -1, 0, 0)\n", systemOut().getHistory());
+        systemOut().clearHistory();
+        
+        list.remove(10, 10, 10, 10);
+        assertFuzzyEquals("Rectangle not found: (10, 10, 10, 10)\n", systemOut().getHistory());
+        systemOut().clearHistory();
+        
+        list.insert(p1);
+        systemOut().clearHistory();
+        list.remove(1, 0, 2, 4);
+        assertFuzzyEquals("Rectangle removed: (a, 1, 0, 2, 4)\n", systemOut().getHistory());
+    }
 
 
     /**
@@ -67,14 +81,13 @@ public class DatabaseTest extends TestCase {
             "Rectangles intersecting region (1, 1, 10, 10):\n");
         systemOut().clearHistory();
 
-        /*
-         * list.insert(p1);
-         * systemOut().clearHistory();
-         * list.regionsearch(0, 0, 20, 20);
-         * assertEquals(systemOut().getHistory(),
-         * "Rectangles intersection region (0, 0, 20, 20):\n" +
-         * "(a, 1, 0, 2, 4)\n");
-         */
+        list.insert(p1);
+        systemOut().clearHistory();
+        list.regionsearch(0, 0, 20, 20);
+        assertEquals(systemOut().getHistory(),
+            "Rectangles intersecting region (0, 0, 20, 20):\n"
+                + "(a, 1, 0, 2, 4)\n");
+
     }
 
 
@@ -87,14 +100,19 @@ public class DatabaseTest extends TestCase {
         systemOut().clearHistory();
 
         list.insert(p1);
+        systemOut().clearHistory();
+        list.intersections();
+        assertEquals(systemOut().getHistory(), "Intersection pairs:\n");
+        systemOut().clearHistory();
+
         Rectangle r3 = new Rectangle(0, 1, 4, 2);
         KVPair<String, Rectangle> p3 = new KVPair<String, Rectangle>("c", r3);
         list.insert(p3);
         systemOut().clearHistory();
 
-        // list.intersections();
-        // assertEquals(systemOut().getHistory(), "Intersections pairs:\n" +
-        // "(a, 1, 0, 2, 4,) | (c, 0, 1, 4, 2)\n");
+        list.intersections();
+        assertEquals(systemOut().getHistory(), "Intersection pairs:\n"
+            + "(a, 1, 0, 2, 4) | (c, 0, 1, 4, 2)\n");
 
     }
 

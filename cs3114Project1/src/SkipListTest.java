@@ -4,7 +4,7 @@ import student.TestCase;
 /**
  * @author Will Logan
  * @version 1.0
- * Test class for Skiplist
+ *          Test class for Skiplist
  */
 public class SkipListTest extends TestCase {
     private SkipList<String, Rectangle> test1 = null;
@@ -117,4 +117,45 @@ public class SkipListTest extends TestCase {
             + "\nSkipList size is: 4", systemOut().getHistory());
     }
 
+
+    public void testRemoveByValue() {
+        assertNull(test1.removeByValue(listRecs[0].getValue()));
+        test1.insert(listRecs[0]);
+        test1.insert(listRecs[1]);
+        test1.insert(listRecs[5]);
+        test1.insert(listRecs[2]);
+        test1.dump();
+        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 5, Value null"
+            + "\nNode with depth 5, Value (a6, -10, -10, 10, 10)"
+            + "\nNode with depth 4, Value (r1, 0, 0, 0, 0)"
+            + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
+            + "\nNode with depth 1, Value (r3, -1, -5, 15, 20)"
+            + "\nSkipList size is: 4", systemOut().getHistory());
+        
+        systemOut().clearHistory();
+        test1.removeByValue(listRecs[5].getValue());
+        test1.dump();
+        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 5, Value null"
+            + "\nNode with depth 4, Value (r1, 0, 0, 0, 0)"
+            + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
+            + "\nNode with depth 1, Value (r3, -1, -5, 15, 20)"
+            + "\nSkipList size is: 3", systemOut().getHistory());
+        
+        systemOut().clearHistory();
+        test1.removeByValue(listRecs[2].getValue());
+        test1.dump();
+        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 5, Value null"
+            + "\nNode with depth 4, Value (r1, 0, 0, 0, 0)"
+            + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
+            + "\nSkipList size is: 2", systemOut().getHistory());
+        
+        systemOut().clearHistory();
+        Rectangle tempRec = new Rectangle(20, 20, 20, 20);
+        assertNull(test1.removeByValue(tempRec));
+        test1.dump();
+        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 5, Value null"
+            + "\nNode with depth 4, Value (r1, 0, 0, 0, 0)"
+            + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
+            + "\nSkipList size is: 2", systemOut().getHistory());
+    }
 }

@@ -38,12 +38,13 @@ public class CommandProcessorTest extends TestCase {
     /**
      * Test that all branches are reached in the processor function
      */
+    // print checks for each line
     public void testProcessor() {
         cmdProc.processor(insert);
 
         cmdProc.processor(removebn);
 
-        // cmdProc.processor(removebx);
+        cmdProc.processor(removebx);
 
         cmdProc.processor(rsearch);
 
@@ -51,7 +52,7 @@ public class CommandProcessorTest extends TestCase {
 
         cmdProc.processor(search);
 
-        // cmdProc.processor(dump);
+        cmdProc.processor(dump);
 
         systemOut().clearHistory();
         cmdProc.processor(unrecognized);

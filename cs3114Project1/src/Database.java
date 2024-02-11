@@ -109,29 +109,27 @@ public class Database {
      *            height of the rectangle to be removed
      */
     public void remove(int x, int y, int w, int h) {
-// Rectangle tempRec = new Rectangle(x, y, w, h);
-// // Case where dimensions given are invalid
-// if (tempRec.isInvalid()) {
-// System.out.println("Rectangle rejected: (" + tempRec.toString()
-// + ")");
-// return;
-// }
-//
-// // Making temp variables to make life easier
-// KVPair<String, Rectangle> tempKVPair = list.removeByValue(tempRec);
-// Rectangle currentRec = tempKVPair.getValue();
-//
-// // Case where Rectangle is found
-// if (currentRec != null) {
-// System.out.println("Rectangle removed: (" + tempKVPair.getKey()
-// + " " + currentRec.toString() + ")");
-// }
-//
-// // Case where rectangle is not found
-// else {
-// System.out.println("Rectangle not found: (" + tempRec.toString()
-// + ")");
-// }
+        Rectangle tempRec = new Rectangle(x, y, w, h);
+        // Case where dimensions given are invalid
+        if (tempRec.isInvalid()) {
+            System.out.println("Rectangle rejected: (" + tempRec.toString()
+                + ")");
+            return;
+        }
+
+        // Making temp variables to make life easier
+        KVPair<String, Rectangle> tempKVPair = list.removeByValue(tempRec);
+
+        // Case where Rectangle is found
+        if (tempKVPair != null) {
+            System.out.println("Rectangle removed: (" + tempKVPair.toString() + ")");
+        }
+
+        // Case where rectangle is not found
+        else {
+            System.out.println("Rectangle not found: (" + tempRec.toString()
+                + ")");
+        }
     }
 
 
@@ -161,9 +159,10 @@ public class Database {
                 + ", " + w + ", " + h + "):");
             Iterator<KVPair<String, Rectangle>> it = list.iterator();
             while (it.hasNext()) { // Iterate through entire skiplist
-                if (tempRec.intersect(it.next().getValue())) {
+                KVPair<String, Rectangle> next = it.next();
+                if (next.getValue().intersect(tempRec)) {
                     // If the current element intersects the region print it out
-                    System.out.println(it.next().toString());
+                    System.out.println(next.toString());
                 }
             }
         }
@@ -189,23 +188,23 @@ public class Database {
         // Create outer iterator for looping
         Iterator<KVPair<String, Rectangle>> outer = list.iterator();
         while (outer.hasNext()) {
+            KVPair<String, Rectangle> onext = outer.next();
             // Create inner iterator for comparing, set it to outer so we don't
             // have to check the entire list every time and can skip pairs we
             // already
             // know intersect
-            Iterator<KVPair<String, Rectangle>> inner = outer;
+            Iterator<KVPair<String, Rectangle>> inner = list.iterator();
+            while(inner.next() != onext) {
+            }
             // Set the inner iterator equal to the one after so we don't compare
             // the same item
-            if (inner.hasNext()) {
-                inner.next();
-            }
             while (inner.hasNext()) {
-                if (outer.next().getValue().intersect(inner.next()
-                    .getValue())) {
+                KVPair<String, Rectangle> inext = inner.next();
+                if (onext.getValue().intersect(inext.getValue())) {
                     // If the outer and inner intersect print out the
                     // intersection
-                    System.out.println(outer.next().toString() + " | " + inner
-                        .next().toString());
+                    System.out.println(onext.toString() + " | " + inext
+                        .toString());
                 }
             }
         }
