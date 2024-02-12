@@ -54,6 +54,7 @@ public class CommandProcessorTest extends TestCase {
         systemOut().clearHistory();
 
         cmdProc.processor(removebn);
+        systemOut().clearHistory();
 
         cmdProc.processor(removebx);
         assertFuzzyEquals("Rectangle not found: (2, 0, 4, 8)\n", systemOut()
@@ -75,6 +76,7 @@ public class CommandProcessorTest extends TestCase {
         systemOut().clearHistory();
 
         cmdProc.processor(search);
+        systemOut().clearHistory();
 
         cmdProc.processor(dump);
         assertFuzzyEquals("Skiplist Dump:\n" + "Node with depth: 4 Value null\n"
