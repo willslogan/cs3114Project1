@@ -85,7 +85,7 @@ public class SkipListTest extends TestCase {
         // 4
         // 0
         test1.dump();
-        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 0, Value null"
+        assertFuzzyEquals("SkipList dump: " + "\nNode with depth 1, value null"
             + "\nSkipList size is: 0", systemOut().getHistory());
         systemOut().clearHistory();
         test1.insert(listRecs[0]);
@@ -174,7 +174,7 @@ public class SkipListTest extends TestCase {
         systemOut().clearHistory();
         assertNull(test1.remove("r1"));
         test1.dump();
-        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 0, Value null"
+        assertFuzzyEquals("SkipList dump:" + "\nNode with depth 1, value null"
             + "\nSkipList size is: 0", systemOut().getHistory());
 
         // Test 2 one item in list
