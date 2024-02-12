@@ -192,21 +192,20 @@ public class Database {
         // Create outer iterator for looping
         Iterator<KVPair<String, Rectangle>> outer = list.iterator();
         while (outer.hasNext()) {
-            KVPair<String, Rectangle> onext = outer.next();
-            // Create inner iterator for comparing, set it to outer so we don't
-            // have to check the entire list every time and can skip pairs we
-            // already
-            // know intersect
+            KVPair<String, Rectangle> onext = outer.next(); // Get next value
+                                                            // for outer
+                                                            // iterator
+            // Create inner iterator for comparing to outer
             Iterator<KVPair<String, Rectangle>> inner = list.iterator();
-            while (inner.next() != onext) {
-            }
-            // Set the inner iterator equal to the one after so we don't compare
-            // the same item
             while (inner.hasNext()) {
-                KVPair<String, Rectangle> inext = inner.next();
-                if (onext.getValue().intersect(inext.getValue())) {
+                KVPair<String, Rectangle> inext = inner.next(); // Get next
+                                                                // value for
+                                                                // inner
+                                                                // iterator
+                if (onext.getValue().intersect(inext.getValue())
+                    && onext != inext) {
                     // If the outer and inner intersect print out the
-                    // intersection
+                    // intersection, as long as they aren't the same
                     System.out.println(onext.toString() + " | " + inext
                         .toString());
                 }

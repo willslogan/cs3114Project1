@@ -127,7 +127,8 @@ public class DatabaseTest extends TestCase {
 
         list.intersections();
         assertEquals(systemOut().getHistory(), "Intersection pairs:\n"
-            + "(a, 1, 0, 2, 4) | (c, 0, 1, 4, 2)\n");
+            + "(a, 1, 0, 2, 4) | (c, 0, 1, 4, 2)\n"
+            + "(c, 0, 1, 4, 2) | (a, 1, 0, 2, 4)\n");
 
     }
 
