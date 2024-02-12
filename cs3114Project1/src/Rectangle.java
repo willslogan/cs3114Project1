@@ -91,16 +91,18 @@ public class Rectangle {
         if (!(this.xCoordinate < (r2.xCoordinate + r2.width))) {
             return false;
         }
-        if (!((this.xCoordinate + this.width) > r2.xCoordinate)) {
+        else if (!((this.xCoordinate + this.width) > r2.xCoordinate)) {
             return false;
         }
-        if (!(this.yCoordinate < (r2.yCoordinate + r2.height))) {
+        else if (!(this.yCoordinate < (r2.yCoordinate + r2.height))) {
             return false;
         }
-        if (!((this.yCoordinate + this.height) > r2.yCoordinate)) {
+        else if (!((this.yCoordinate + this.height) > r2.yCoordinate)) {
             return false;
         }
-        return true;
+        else {
+            return true;
+        }
     }
 
 
@@ -158,8 +160,7 @@ public class Rectangle {
         int y = this.yCoordinate;
         int w = this.width;
         int h = this.height;
-        return "" + x + ", " + y + ", " + w
-            + ", " + h;
+        return "" + x + ", " + y + ", " + w + ", " + h;
     }
 
 
@@ -173,18 +174,18 @@ public class Rectangle {
         if (this.height <= 0 || this.width <= 0) {
             return true;
         }
-
         // Invalid if xCoordinate or yCoordinate are less than zero
-        if (this.xCoordinate < 0 || this.yCoordinate < 0) {
+        else if (this.xCoordinate < 0 || this.yCoordinate < 0) {
             return true;
         }
 
         // Invalid if perimeter goes beyond world box
-        if ((this.xCoordinate + this.width) > WORLD_BOX || (this.yCoordinate
-            + this.height) > WORLD_BOX) {
+        else if ((this.xCoordinate + this.width) > WORLD_BOX
+            || (this.yCoordinate + this.height) > WORLD_BOX) {
             return true;
         }
-
-        return false;
+        else {
+            return false;
+        }
     }
 }

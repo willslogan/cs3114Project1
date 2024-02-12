@@ -1,5 +1,6 @@
 /**
- * The purpose of this class is to parse a single line from the command text file
+ * The purpose of this class is to parse a single line from the command text
+ * file
  * according to the format specified in the project specs.
  * 
  * @author CS Staff
@@ -18,8 +19,6 @@ public class CommandProcessor {
      * exist, so the only constructor takes a database class object to feed
      * commands to.
      * 
-     * @param dataIn
-     *            the database object to manipulate
      */
     public CommandProcessor() {
         data = new Database();
@@ -29,8 +28,9 @@ public class CommandProcessor {
     /**
      * This method parses keywords in the line and calls methods in the
      * database as required. Each line command will be specified by one of the
-     * keywords to perform the actions. 
-     * These actions are performed on specified objects and include insert, remove,
+     * keywords to perform the actions.
+     * These actions are performed on specified objects and include insert,
+     * remove,
      * regionsearch, search, and dump. If the command in the file line is not
      * one of these, an appropriate message will be written in the console. This
      * processor method is called for each line in the file. Note that the
@@ -43,23 +43,30 @@ public class CommandProcessor {
     public void processor(String line) {
         // converts the string of the line into an
         // array of its space (" ") delimited elements
-        String[] arr = line.split("\\s{1,}");        
+        String[] arr = line.split("\\s{1,}");
         String command = arr[0]; // the command will be the first of these
                                  // elements
         // calls the insert function and passes the correct
         // parameters by converting the string integers into
         // their Integer equivalent, trimming the whitespace
         if (command.equals("insert")) {
-            //Calls insert
-            String name = arr[1];   // Store the name of the rectangle we are inserting
-            int x = Integer.parseInt(arr[2]); //Store the x coordinate of the rectangle
-            int y = Integer.parseInt(arr[3]); //Store the y coordinate of the rectangle
-            int w = Integer.parseInt(arr[4]); //Store the width of the rectangle 
-            int h = Integer.parseInt(arr[5]); //Store the height of the rectangle
-            Rectangle rec = new Rectangle(x, y, w, h); //Create instance of the rectangle
-            KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(name, rec);  //Create instance of KVPair that gets added to databse
-            data.insert(pair);  //Insert the rectangle pair
-            
+            // Calls insert
+            String name = arr[1]; // Store the name of the rectangle we are
+                                  // inserting
+            int x = Integer.parseInt(arr[2]); // Store the x coordinate of the
+                                              // rectangle
+            int y = Integer.parseInt(arr[3]); // Store the y coordinate of the
+                                              // rectangle
+            int w = Integer.parseInt(arr[4]); // Store the width of the
+                                              // rectangle
+            int h = Integer.parseInt(arr[5]); // Store the height of the
+                                              // rectangle
+            Rectangle rec = new Rectangle(x, y, w, h); // Create instance of the
+                                                       // rectangle
+            KVPair<String, Rectangle> pair = new KVPair<String, Rectangle>(name,
+                rec); // Create instance of KVPair that gets added to databse
+            data.insert(pair); // Insert the rectangle pair
+
         }
         // calls the appropriate remove method based on the
         // number of white space delimited strings in the line
@@ -68,46 +75,55 @@ public class CommandProcessor {
             int numParam = arr.length - 1;
             if (numParam == 1) {
                 // Calls remove by name
-                String name = arr[1];   // Store name of rectangle being removed
-                data.remove(name);  // Remove rectangle
+                String name = arr[1]; // Store name of rectangle being removed
+                data.remove(name); // Remove rectangle
             }
             else if (numParam == 4) {
                 // Calls remove by coordinate, converting string
                 // integers into their Integer equivalent minus whitespace
-                int x = Integer.parseInt(arr[1]); //Store the x coordinate of the rectangle
-                int y = Integer.parseInt(arr[2]); //Store the y coordinate of the rectangle
-                int w = Integer.parseInt(arr[3]); //Store the width of the rectangle 
-                int h = Integer.parseInt(arr[4]); //Store the height of the rectangle
+                int x = Integer.parseInt(arr[1]); // Store the x coordinate of
+                                                  // the rectangle
+                int y = Integer.parseInt(arr[2]); // Store the y coordinate of
+                                                  // the rectangle
+                int w = Integer.parseInt(arr[3]); // Store the width of the
+                                                  // rectangle
+                int h = Integer.parseInt(arr[4]); // Store the height of the
+                                                  // rectangle
                 data.remove(x, y, w, h); // Remove the rectangle
             }
-            
+
         }
         else if (command.equals("regionsearch")) {
             // calls the regionsearch method for a set of coordinates
             // the string integers in the line will be trimmed of whitespace
-            int x = Integer.parseInt(arr[1]); //Store the x coordinate of the search
-            int y = Integer.parseInt(arr[2]); //Store the y coordinate of the search
-            int w = Integer.parseInt(arr[3]); //Store the width of the search
-            int h = Integer.parseInt(arr[4]); //Store the height of the search
-            data.regionsearch(x, y, w, h); //Search for rectangles with specified parameters
+            int x = Integer.parseInt(arr[1]); // Store the x coordinate of the
+                                              // search
+            int y = Integer.parseInt(arr[2]); // Store the y coordinate of the
+                                              // search
+            int w = Integer.parseInt(arr[3]); // Store the width of the search
+            int h = Integer.parseInt(arr[4]); // Store the height of the search
+            data.regionsearch(x, y, w, h); // Search for rectangles with
+                                           // specified parameters
         }
         else if (command.equals("intersections")) {
             // calls the intersections method, no parameters to be passed
-            // (see the intersections JavaDoc in the Database class for more information)
-            data.intersections(); 
+            // (see the intersections JavaDoc in the Database class for more
+            // information)
+            data.intersections();
         }
         else if (command.equals("search")) {
             // calls the search method for a name of object
-            String name = arr[1];   // Store name we are searching for
-            data.search(name);  // Call search function
+            String name = arr[1]; // Store name we are searching for
+            data.search(name); // Call search function
         }
         else if (command.equals("dump")) {
             // calls the dump method for the database, takes no parameters
-            // (see the dump() JavaDoc in the Database class for more information)
+            // (see the dump() JavaDoc in the Database class for more
+            // information)
             data.dump();
         }
         else {
-                // the first white space delimited string in the line is not
+            // the first white space delimited string in the line is not
             // one of the commands which can manipulate the database,
             // a message will be written to the console
             System.out.println("Unrecognized command.");
