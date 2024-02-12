@@ -55,7 +55,7 @@ public class Database {
         // writing the correct message to the console from
         // that
         Rectangle currentRec = pair.getValue();
-        if (!currentRec.isInvalid()) {
+        if (currentRec.isInvalid()) {
             System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + currentRec.toString() + ")");
         }
@@ -153,8 +153,13 @@ public class Database {
         Rectangle tempRec = new Rectangle(x, y, w, h);
         System.out.println("regionsearch " + x + " " + y + " " + w + " " + h);
         // Check skiplist for intersections with region and display them
-        if (!tempRec.isInvalid()) // Check if the rectangle region is valid
+        if (tempRec.isInvalidRegionSearch()) // Check if the rectangle region is valid
         {
+            // Print out reject statment
+            System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
+                + ", " + h + ")");
+        }
+        else {
             // Output expecterd header
             System.out.println("Rectangles intersecting region (" + x + ", " + y
                 + ", " + w + ", " + h + "):");
@@ -166,11 +171,6 @@ public class Database {
                     System.out.println(next.toString());
                 }
             }
-        }
-        else {
-            // Print out reject statment
-            System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
-                + ", " + h + ")");
         }
     }
 

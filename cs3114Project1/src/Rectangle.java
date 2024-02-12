@@ -188,4 +188,24 @@ public class Rectangle {
             return false;
         }
     }
+
+
+    /**
+     * Check if the rectangle is a valid region search
+     * 
+     * @return true if the region search has invalid parameters, false if not
+     */
+    public boolean isInvalidRegionSearch() {
+        // Invalid if height and width are not greater than 0
+        if (this.height <= 0 || this.width <= 0) {
+            return true;
+        }
+        // Invalid if xCoordinate or yCoordinate are less than zero
+        else if (this.xCoordinate < 0 || this.yCoordinate < 0) {
+            return true;
+        }
+        else {
+            return false;
+        }
+    }
 }

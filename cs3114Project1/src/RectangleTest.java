@@ -184,4 +184,24 @@ public class RectangleTest extends TestCase {
 
         assertFalse(r2.isInvalid());
     }
+
+
+    /**
+     * Test that the invalid region search method works
+     */
+    public void testIsInvalidRegionSearch() {
+        assertTrue(r1.isInvalidRegionSearch());
+        Rectangle r6 = new Rectangle(1, 1, -5, 10);
+        Rectangle r7 = new Rectangle(1, 1, 10, 0);
+        assertTrue(r6.isInvalidRegionSearch());
+        assertTrue(r7.isInvalidRegionSearch());
+        Rectangle r8 = new Rectangle(1, -5, 10, 10);
+        Rectangle r9 = new Rectangle(-5, 10, 10, 10);
+        assertTrue(r8.isInvalidRegionSearch());
+        assertTrue(r3.isInvalidRegionSearch());
+        assertTrue(r9.isInvalidRegionSearch());
+
+        assertFalse(r2.isInvalidRegionSearch());
+
+    }
 }
