@@ -149,17 +149,15 @@ public class Database {
      *            height of the region
      */
     public void regionsearch(int x, int y, int w, int h) {
-        // Create rectangle with the values of the region search
-        Rectangle tempRec = new Rectangle(x, y, w, h);
-        System.out.println("regionsearch " + x + " " + y + " " + w + " " + h);
         // Check skiplist for intersections with region and display them
-        if (tempRec.isInvalidRegionSearch()) // Check if the rectangle region is valid
+        if (w <= 0 || h <= 0) // Check if the rectangle region is valid
         {
             // Print out reject statment
             System.out.println("Rectangle rejected: (" + x + ", " + y + ", " + w
                 + ", " + h + ")");
         }
         else {
+            Rectangle tempRec = new Rectangle(x, y, w, h);
             // Output expecterd header
             System.out.println("Rectangles intersecting region (" + x + ", " + y
                 + ", " + w + ", " + h + "):");

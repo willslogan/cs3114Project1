@@ -79,21 +79,21 @@ public class DatabaseTest extends TestCase {
      */
     public void testRegionSearch() {
         list.regionsearch(1, 1, -1, -5);
-        assertEquals(systemOut().getHistory(), "regionsearch 1 1 -1 -5\n"
-            + "Rectangle rejected: (1, 1, -1, -5)\n");
+        assertEquals(systemOut().getHistory(),
+            "Rectangle rejected: (1, 1, -1, -5)\n");
         systemOut().clearHistory();
 
         list.regionsearch(1, 1, 10, 10);
-        assertEquals(systemOut().getHistory(), "regionsearch 1 1 10 10\n"
-            + "Rectangles intersecting region (1, 1, 10, 10):\n");
+        assertEquals(systemOut().getHistory(),
+            "Rectangles intersecting region (1, 1, 10, 10):\n");
         systemOut().clearHistory();
 
         list.insert(p1);
         systemOut().clearHistory();
         list.regionsearch(0, 0, 20, 20);
-        assertEquals(systemOut().getHistory(), "regionsearch 0 0 20 20\n"
-            + "Rectangles intersecting region (0, 0, 20, 20):\n"
-            + "(a, 1, 0, 2, 4)\n");
+        assertEquals(systemOut().getHistory(),
+            "Rectangles intersecting region (0, 0, 20, 20):\n"
+                + "(a, 1, 0, 2, 4)\n");
 
     }
 

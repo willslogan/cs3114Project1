@@ -62,14 +62,12 @@ public class CommandProcessorTest extends TestCase {
         systemOut().clearHistory();
 
         cmdProc.processor(rsearch);
-        assertFuzzyEquals("regionsearch 0 500 20 1\n"
-            + "Rectangles intersecting region (0, 500, 20, 1)\n", systemOut()
+        assertFuzzyEquals("Rectangles intersecting region (0, 500, 20, 1)\n", systemOut()
                 .getHistory());
         systemOut().clearHistory();
 
         cmdProc.processor(rsearchin);
-        assertFuzzyEquals("regionsearch 5 5 0 0\n"
-            + "Rectangle rejected: (-5, -5, 0, 0)\n", systemOut().getHistory());
+        assertFuzzyEquals("Rectangle rejected: (-5, -5, 0, 0)\n", systemOut().getHistory());
         systemOut().clearHistory();
 
         cmdProc.processor(intersect);
