@@ -78,19 +78,18 @@ public class Database {
      */
     public void remove(String name) {
         // Making temp variable to make life easier
-// KVPair<String, Rectangle> tempKV = list.remove(name);
-//
-// // Rectangle was found and successfully removed from the list
-// if (tempKV != null) {
-// System.out.println("Rectangle removed: (" + name + " " +
-// tempKV.getValue().toString()
-// .toString() + ")");
-// }
-//
-// // Rectangle with specified rectangle doesn't exist within the list
-// else {
-// System.out.println("Rectangle not removed: " + name);
-// }
+        KVPair<String, Rectangle> tempKV = list.remove(name);
+
+        // Rectangle was found and successfully removed from the list
+        if (tempKV != null) {
+            System.out.println("Rectangle removed: (" + name + " " + tempKV
+                .getValue().toString().toString() + ")");
+        }
+
+        // Rectangle with specified rectangle doesn't exist within the list
+        else {
+            System.out.println("Rectangle not removed: " + name);
+        }
 
     }
 

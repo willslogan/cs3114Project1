@@ -25,7 +25,7 @@ public class SkipList<K extends Comparable<? super K>, V>
      * Initializes the fields head, size and level
      */
     public SkipList() {
-        head = new SkipNode(null, 0);
+        head = new SkipNode(null, 1);
         size = 0;
     }
 
@@ -217,15 +217,15 @@ public class SkipList<K extends Comparable<? super K>, V>
      */
     public void dump() {
         SkipNode temp = head;
-        System.out.println("Skiplist Dump:");
-        String depth = "Node with depth: " + temp.level;
-        String value = " Value null";
+        System.out.println("SkipList dump:");
+        String depth = "Node with depth " + temp.level + ", ";
+        String value = "value null";
         System.out.println(depth + value);
         if (size() >= 1) {
             temp = temp.forward[0];
             while (temp != null) {
-                depth = "Node with depth: " + temp.level;
-                value = " Value (" + temp.element().getKey() + ", " + temp
+                depth = "Node with depth " + temp.level + ", ";
+                value = "value (" + temp.element().getKey() + ", " + temp
                     .element().getValue() + ")";
                 System.out.println(depth + value);
                 temp = temp.forward[0];
