@@ -82,7 +82,7 @@ public class Database {
 
         // Rectangle was found and successfully removed from the list
         if (tempKV != null) {
-            System.out.println("Rectangle removed: (" + name + " " + tempKV
+            System.out.println("Rectangle removed: (" + name + ", " + tempKV
                 .getValue().toString().toString() + ")");
         }
 
@@ -218,21 +218,21 @@ public class Database {
      *            name of the Rectangle to be searched for
      */
     public void search(String name) {
-// ArrayList<KVPair<String, Rectangle>> results = list.search(name);
-// // No rectangle was found with that name
-// if (results == null) {
-// System.out.println("Rectangle not found: (" + name + ")");
-// }
-// // One or more rectangle was found with name
-// else {
-// System.out.println("Rectangles Found:");
-// for (int i = 0; i < results.size(); i++) {
-// // temp variable so it less writing
-// Rectangle currentRec = results.get(i).getValue();
-// System.out.println("(" + name + " " + currentRec.toString()
-// + ")");
-// }
-// }
+        ArrayList<KVPair<String, Rectangle>> results = list.search(name);
+        // No rectangle was found with that name
+        if (results == null) {
+            System.out.println("Rectangle not found: (" + name + ")");
+        }
+        // One or more rectangle was found with name
+        else {
+            System.out.println("Rectangles Found:");
+            for (int i = 0; i < results.size(); i++) {
+                // temp variable so it less writing
+                Rectangle currentRec = results.get(i).getValue();
+                System.out.println("(" + name + " " + currentRec.toString()
+                    + ")");
+            }
+        }
     }
 
 

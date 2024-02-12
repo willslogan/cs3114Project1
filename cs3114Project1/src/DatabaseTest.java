@@ -45,13 +45,14 @@ public class DatabaseTest extends TestCase {
 
     public void testRemove() {
 
-//        list.insert(p1);
-//        list.remove("a");
-//        list.remove("b");
-//        assertEquals(systemOut().getHistory(),
-//            "Rectangle inserted: (a, 1, 0, 2, 4)\n"
-//                + "Rectangle removed: (a, 1, 0, 2, 4)\n"
-//                + "Rectangle not removed: b\n");
+        list.insert(p1);
+        list.remove("a");
+        list.remove("b");
+        assertEquals(systemOut().getHistory(),
+            "Rectangle inserted: (a, 1, 0, 2, 4)\n"
+                + "Rectangle removed: (a, 1, 0, 2, 4)\n"
+                + "Rectangle not removed: b\n");
+        systemOut().clearHistory();
         list.remove(-1, -1, 0, 0);
         assertFuzzyEquals("Rectangle rejected: (-1, -1, 0, 0)\n", systemOut().getHistory());
         systemOut().clearHistory();
@@ -116,11 +117,12 @@ public class DatabaseTest extends TestCase {
 
     }
 
-// public void testSearch() {
-// list.search("a");
-// assertEquals(systemOut().getHistory(), "Rectangle not found: (a)\n");
-// // can't test rest because search isn't implemented
-// }
+
+    public void testSearch() {
+        list.search("a");
+        assertEquals(systemOut().getHistory(), "Rectangle not found: (a)\n");
+        // can't test rest because search isn't implemented
+    }
 
 
     /**
@@ -129,15 +131,15 @@ public class DatabaseTest extends TestCase {
     public void testDump() {
 
         list.dump();
-        assertFuzzyEquals(systemOut().getHistory(), "Skiplist Dump:\n"
-            + "Node with depth: 0 Value null\n" + "SkipList size is: 0\n");
+        assertFuzzyEquals(systemOut().getHistory(), "SkipList dump:\n"
+            + "Node with depth 1, value null\n" + "SkipList size is: 0\n");
         list.insert(p1);
         systemOut().clearHistory();
 
         list.dump();
         assertFuzzyEquals(systemOut().getHistory(), "SkipList Dump:\n"
-            + "Node with depth: 4 Value null\n"
-            + "Node with depth: 4 Value (a, 1, 0, 2, 4)\n"
+            + "Node with depth 4, value null\n"
+            + "Node with depth 4, value (a, 1, 0, 2, 4)\n"
             + "SkipList size is: 1\n");
 
     }
