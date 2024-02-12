@@ -55,7 +55,7 @@ public class Database {
         // writing the correct message to the console from
         // that
         Rectangle currentRec = pair.getValue();
-        if (currentRec.isInvalid()) {
+        if (!currentRec.isInvalid()) {
             System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + currentRec.toString() + ")");
         }
@@ -121,7 +121,8 @@ public class Database {
 
         // Case where Rectangle is found
         if (tempKVPair != null) {
-            System.out.println("Rectangle removed: (" + tempKVPair.toString() + ")");
+            System.out.println("Rectangle removed: (" + tempKVPair.toString()
+                + ")");
         }
 
         // Case where rectangle is not found
@@ -150,6 +151,7 @@ public class Database {
     public void regionsearch(int x, int y, int w, int h) {
         // Create rectangle with the values of the region search
         Rectangle tempRec = new Rectangle(x, y, w, h);
+        System.out.println("regionsearch " + x + " " + y + " " + w + " " + h);
         // Check skiplist for intersections with region and display them
         if (!tempRec.isInvalid()) // Check if the rectangle region is valid
         {
@@ -193,7 +195,7 @@ public class Database {
             // already
             // know intersect
             Iterator<KVPair<String, Rectangle>> inner = list.iterator();
-            while(inner.next() != onext) {
+            while (inner.next() != onext) {
             }
             // Set the inner iterator equal to the one after so we don't compare
             // the same item

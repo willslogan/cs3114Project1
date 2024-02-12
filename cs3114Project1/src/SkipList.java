@@ -165,7 +165,7 @@ public class SkipList<K extends Comparable<? super K>, V>
         }
 
         for (int i = 0; i <= head.level; i++) { // Splice into list
-            if(update[i].forward[i] == temp) {
+            if (update[i].forward[i] == temp) {
                 update[i].forward[i] = temp.forward[i]; // Who points to x
             }
         }

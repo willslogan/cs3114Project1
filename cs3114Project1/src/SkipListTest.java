@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 /**
  * Test class for Skiplist
+ * 
  * @author Will Logan
  * @version 1.0
  *          Test class for Skiplist
@@ -120,6 +121,9 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Test search
+     */
     public void testSearch() {
         // levels for random seed in order
         // 4,0,5,1,4,0,1,4,0
@@ -162,6 +166,9 @@ public class SkipListTest extends TestCase {
     }
 
 
+    /**
+     * Test remove by name
+     */
     public void testRemove() {
 // for (int i = 0; i < 20; i++) {
 // System.out.println(test1.randomLevel());
@@ -190,12 +197,12 @@ public class SkipListTest extends TestCase {
         systemOut().clearHistory();
         test1.insert(listRecs[1]); // size 1 , level 0
         assertNull(test1.remove("r1"));
-        
+
         test1.dump();
         assertFuzzyEquals("SkipList dump:" + "\nNode with depth 4, Value null"
             + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
             + "\nSkipList size is: 1", systemOut().getHistory());
-        
+
         assertEquals(1, test1.size());
 
         // Test 3 add a couple more and remove last node
@@ -211,7 +218,7 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 4, Value (r4, 20, 20, 10, 10)"
             + "\nSkipList size is: 4", systemOut().getHistory());
         assertEquals(listRecs[3], test1.remove("r4"));
-        
+
         systemOut().clearHistory();
         test1.dump();
         assertFuzzyEquals("SkipList dump:" + "\nNode with depth 5, Value null"
@@ -231,7 +238,7 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 1, Value (r3, -1, -5, 15, 20)"
             + "\nNode with depth 0, Value (r4, 20, 20, 10, 10)"
             + "\nSkipList size is: 3", systemOut().getHistory());
-        
+
         assertEquals(3, test1.size());
 
         // Test 5 remove node that has duplicates that are middle
@@ -246,10 +253,13 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 1, Value (r3, -1, -5, 15, 20)"
             + "\nNode with depth 0, Value (r4, 20, 20, 10, 10)"
             + "\nSkipList size is: 4", systemOut().getHistory());
-        
 
     }
 
+
+    /**
+     * Test removebyvlaue
+     */
     public void testRemoveByValue() {
         assertNull(test1.removeByValue(listRecs[0].getValue()));
         test1.insert(listRecs[0]);
@@ -263,7 +273,7 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
             + "\nNode with depth 1, Value (r3, -1, -5, 15, 20)"
             + "\nSkipList size is: 4", systemOut().getHistory());
-        
+
         systemOut().clearHistory();
         test1.removeByValue(listRecs[5].getValue());
         test1.dump();
@@ -272,7 +282,7 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
             + "\nNode with depth 1, Value (r3, -1, -5, 15, 20)"
             + "\nSkipList size is: 3", systemOut().getHistory());
-        
+
         systemOut().clearHistory();
         test1.removeByValue(listRecs[2].getValue());
         test1.dump();
@@ -280,7 +290,7 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 4, Value (r1, 0, 0, 0, 0)"
             + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
             + "\nSkipList size is: 2", systemOut().getHistory());
-        
+
         systemOut().clearHistory();
         Rectangle tempRec = new Rectangle(20, 20, 20, 20);
         assertNull(test1.removeByValue(tempRec));

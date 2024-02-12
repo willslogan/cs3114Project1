@@ -43,6 +43,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Test Remove
+     */
     public void testRemove() {
 
         list.insert(p1);
@@ -54,17 +57,20 @@ public class DatabaseTest extends TestCase {
                 + "Rectangle not removed: b\n");
         systemOut().clearHistory();
         list.remove(-1, -1, 0, 0);
-        assertFuzzyEquals("Rectangle rejected: (-1, -1, 0, 0)\n", systemOut().getHistory());
+        assertFuzzyEquals("Rectangle rejected: (-1, -1, 0, 0)\n", systemOut()
+            .getHistory());
         systemOut().clearHistory();
-        
+
         list.remove(10, 10, 10, 10);
-        assertFuzzyEquals("Rectangle not found: (10, 10, 10, 10)\n", systemOut().getHistory());
+        assertFuzzyEquals("Rectangle not found: (10, 10, 10, 10)\n", systemOut()
+            .getHistory());
         systemOut().clearHistory();
-        
+
         list.insert(p1);
         systemOut().clearHistory();
         list.remove(1, 0, 2, 4);
-        assertFuzzyEquals("Rectangle removed: (a, 1, 0, 2, 4)\n", systemOut().getHistory());
+        assertFuzzyEquals("Rectangle removed: (a, 1, 0, 2, 4)\n", systemOut()
+            .getHistory());
     }
 
 
@@ -73,21 +79,21 @@ public class DatabaseTest extends TestCase {
      */
     public void testRegionSearch() {
         list.regionsearch(1, 1, -1, -5);
-        assertEquals(systemOut().getHistory(),
-            "Rectangle rejected: (1, 1, -1, -5)\n");
+        assertEquals(systemOut().getHistory(), "regionsearch 1 1 -1 -5\n"
+            + "Rectangle rejected: (1, 1, -1, -5)\n");
         systemOut().clearHistory();
 
         list.regionsearch(1, 1, 10, 10);
-        assertEquals(systemOut().getHistory(),
-            "Rectangles intersecting region (1, 1, 10, 10):\n");
+        assertEquals(systemOut().getHistory(), "regionsearch 1 1 10 10\n"
+            + "Rectangles intersecting region (1, 1, 10, 10):\n");
         systemOut().clearHistory();
 
         list.insert(p1);
         systemOut().clearHistory();
         list.regionsearch(0, 0, 20, 20);
-        assertEquals(systemOut().getHistory(),
-            "Rectangles intersecting region (0, 0, 20, 20):\n"
-                + "(a, 1, 0, 2, 4)\n");
+        assertEquals(systemOut().getHistory(), "regionsearch 0 0 20 20\n"
+            + "Rectangles intersecting region (0, 0, 20, 20):\n"
+            + "(a, 1, 0, 2, 4)\n");
 
     }
 
@@ -118,6 +124,9 @@ public class DatabaseTest extends TestCase {
     }
 
 
+    /**
+     * Test search method
+     */
     public void testSearch() {
         list.search("a");
         assertEquals(systemOut().getHistory(), "Rectangle not found: (a)\n");
