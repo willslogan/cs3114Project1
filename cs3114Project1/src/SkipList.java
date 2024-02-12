@@ -48,7 +48,29 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
      *            key to be searched for
      */
     public ArrayList<KVPair<K, V>> search(K key) {
-        return null;
+        if (size() == 0) {
+            return null;
+        }
+
+        SkipNode x = head; // Dummy header node
+        for (int i = head.level; i >= 0; i--) { // For each level...
+            while ((x.forward[i] != null) && (x.forward[i].element().getKey()
+                .compareTo(key) < 0)) { // go forward
+                x = x.forward[i]; // Go one last step
+            }
+        }
+        x = x.forward[0]; // Move to actual record, if it exists
+        ArrayList<KVPair<K, V>> results = new ArrayList<KVPair<K, V>>();
+        while ((x != null) && (x.element().getKey().compareTo(key) == 0)) {
+            results.add(x.element());
+            x = x.forward[0];
+        } // Got it
+        if (results.isEmpty()) {
+            return null;
+        }
+        else {
+            return results;
+        }
     }
 
 
@@ -119,7 +141,33 @@ public class SkipList<K extends Comparable<? super K>, V> implements Iterable<KV
     
     @SuppressWarnings("unchecked")
     public KVPair<K, V> remove(K key) {
-        return null;
+        // Track end of level
+        SkipNode[] update = (SkipNode[])Array.newInstance(
+            SkipList.SkipNode.class, head.level + 1);
+        SkipNode temp = head; // Start at header node
+        for (int i = head.level; i >= 0; i--) { // Find insert position
+            while ((temp.forward[i] != null) && (temp.forward[i].element()
+                .getKey().compareTo(key) < 0))
+                temp = temp.forward[i];
+            update[i] = temp; // Track end at level i
+        }
+
+        temp = temp.forward[0]; // ideal node we are trying to remove if it is
+                                // there
+        SkipNode deletedNode = temp;
+        if (deletedNode == null || temp.element().getKey().compareTo(
+            key) != 0) {
+            return null;
+        }
+
+        for (int i = 0; i <= head.level; i++) { // Splice into list
+            if(update[i].forward[i] == temp) {
+                update[i].forward[i] = temp.forward[i]; // Who points to x
+            }
+        }
+
+        size--; // decrement dictionary size
+        return deletedNode.element();
     }
   
     /**
