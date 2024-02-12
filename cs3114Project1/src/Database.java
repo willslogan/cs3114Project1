@@ -88,7 +88,7 @@ public class Database {
 
         // Rectangle with specified rectangle doesn't exist within the list
         else {
-            System.out.println("Rectangle not removed: " + name);
+            System.out.println("Rectangle not removed: (" + name + ")");
         }
 
     }
@@ -164,7 +164,12 @@ public class Database {
             Iterator<KVPair<String, Rectangle>> it = list.iterator();
             while (it.hasNext()) { // Iterate through entire skiplist
                 KVPair<String, Rectangle> next = it.next();
-                if (next.getValue().intersect(tempRec)) {
+                if (next.getValue().intersect(tempRec)) { // might not work
+                                                          // because intersect
+                                                          // for rectangle and
+                                                          // region search have
+                                                          // different
+                                                          // definitions
                     // If the current element intersects the region print it out
                     System.out.println(next.toString());
                 }

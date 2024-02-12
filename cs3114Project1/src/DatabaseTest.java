@@ -54,7 +54,7 @@ public class DatabaseTest extends TestCase {
         assertEquals(systemOut().getHistory(),
             "Rectangle inserted: (a, 1, 0, 2, 4)\n"
                 + "Rectangle removed: (a, 1, 0, 2, 4)\n"
-                + "Rectangle not removed: b\n");
+                + "Rectangle not removed: (b)\n");
         systemOut().clearHistory();
         list.remove(-1, -1, 0, 0);
         assertFuzzyEquals("Rectangle rejected: (-1, -1, 0, 0)\n", systemOut()
@@ -78,9 +78,14 @@ public class DatabaseTest extends TestCase {
      * Test that region search works
      */
     public void testRegionSearch() {
-        list.regionsearch(1, 1, -1, -5);
+        list.regionsearch(1, 1, -1, 5);
         assertEquals(systemOut().getHistory(),
-            "Rectangle rejected: (1, 1, -1, -5)\n");
+            "Rectangle rejected: (1, 1, -1, 5)\n");
+        systemOut().clearHistory();
+
+        list.regionsearch(1, 1, 1, -5);
+        assertEquals(systemOut().getHistory(),
+            "Rectangle rejected: (1, 1, 1, -5)\n");
         systemOut().clearHistory();
 
         list.regionsearch(1, 1, 10, 10);
@@ -115,6 +120,9 @@ public class DatabaseTest extends TestCase {
         Rectangle r3 = new Rectangle(0, 1, 4, 2);
         KVPair<String, Rectangle> p3 = new KVPair<String, Rectangle>("c", r3);
         list.insert(p3);
+        Rectangle r4 = new Rectangle(50, 50, 5, 5);
+        KVPair<String, Rectangle> p4 = new KVPair<String, Rectangle>("d", r4);
+        list.insert(p4);
         systemOut().clearHistory();
 
         list.intersections();

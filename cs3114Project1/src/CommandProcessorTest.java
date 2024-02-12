@@ -14,6 +14,7 @@ public class CommandProcessorTest extends TestCase {
     private String insx;
     private String removebn;
     private String removebx;
+    private String remove3;
     private String rsearch;
     private String rsearchin;
     private String intersect;
@@ -30,6 +31,7 @@ public class CommandProcessorTest extends TestCase {
         insx = "insart";
         removebn = "remove b";
         removebx = "remove 2 0 4 8";
+        remove3 = "remove 2 0 4";
         rsearch = "regionsearch 0 500 20 1";
         rsearchin = "regionsearch -5 -5 0 0";
         intersect = "intersections";
@@ -54,6 +56,8 @@ public class CommandProcessorTest extends TestCase {
         systemOut().clearHistory();
 
         cmdProc.processor(removebn);
+        assertFuzzyEquals("Rectangle not removed: (b)\n", systemOut()
+            .getHistory());
         systemOut().clearHistory();
 
         cmdProc.processor(removebx);
@@ -61,13 +65,18 @@ public class CommandProcessorTest extends TestCase {
             .getHistory());
         systemOut().clearHistory();
 
+        cmdProc.processor(remove3);
+        assertFuzzyEquals("", systemOut().getHistory());
+        systemOut().clearHistory();
+
         cmdProc.processor(rsearch);
-        assertFuzzyEquals("Rectangles intersecting region (0, 500, 20, 1)\n", systemOut()
-                .getHistory());
+        assertFuzzyEquals("Rectangles intersecting region (0, 500, 20, 1)\n",
+            systemOut().getHistory());
         systemOut().clearHistory();
 
         cmdProc.processor(rsearchin);
-        assertFuzzyEquals("Rectangle rejected: (-5, -5, 0, 0)\n", systemOut().getHistory());
+        assertFuzzyEquals("Rectangle rejected: (-5, -5, 0, 0)\n", systemOut()
+            .getHistory());
         systemOut().clearHistory();
 
         cmdProc.processor(intersect);
@@ -75,6 +84,8 @@ public class CommandProcessorTest extends TestCase {
         systemOut().clearHistory();
 
         cmdProc.processor(search);
+        assertFuzzyEquals("Rectangles Found: \n" + "(a, 1, 0, 2, 4)\n",
+            systemOut().getHistory());
         systemOut().clearHistory();
 
         cmdProc.processor(dump);
