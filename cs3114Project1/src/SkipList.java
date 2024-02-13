@@ -52,29 +52,22 @@ public class SkipList<K extends Comparable<? super K>, V>
      * @return KVPair found, null if not
      */
     public ArrayList<KVPair<K, V>> search(K key) {
-        if (size() == 0) {
-            return null;
-        }
-
         SkipNode x = head; // Dummy header node
-        for (int i = head.level; i >= 0; i--) { // For each level...
+        for (int i = head.level; i >= 0; i--) // For each level...
             while ((x.forward[i] != null) && (x.forward[i].element().getKey()
-                .compareTo(key) < 0)) { // go forward
+                .compareTo(key) < 0)) // go forward
                 x = x.forward[i]; // Go one last step
-            }
-        }
         x = x.forward[0]; // Move to actual record, if it exists
-        ArrayList<KVPair<K, V>> results = new ArrayList<KVPair<K, V>>();
-        while ((x != null) && (x.element().getKey().compareTo(key) == 0)) {
-            results.add(x.element());
-            x = x.forward[0];
-        } // Got it
-        if (results.isEmpty()) {
-            return null;
-        }
-        else {
+        if ((x != null) && (x.element().getKey().compareTo(key) == 0)) {
+            ArrayList<KVPair<K, V>> results = new ArrayList<KVPair<K, V>>();
+            while (x != null && x.element().getKey().compareTo(key) == 0) {
+                results.add(x.element());
+                x = x.forward[0];
+            }
             return results;
         }
+        else
+            return null; // Its not there
     }
 
 

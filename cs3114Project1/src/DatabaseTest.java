@@ -3,6 +3,7 @@
  * 
  */
 import student.TestCase;
+import java.util.ArrayList;
 
 /**
  * @author Jacob Fast
@@ -16,6 +17,25 @@ public class DatabaseTest extends TestCase {
     private Rectangle r2;
     private KVPair<String, Rectangle> p2;
     private Database list2;
+    private ArrayList<KVPair<String, Rectangle>> tests;
+    private KVPair<String, Rectangle> rectangle1;
+    private KVPair<String, Rectangle> rectangle2;
+    private KVPair<String, Rectangle> rectangle3;
+    private KVPair<String, Rectangle> rectangle4;
+    private KVPair<String, Rectangle> rectangle5;
+    private KVPair<String, Rectangle> rectangle6;
+    private KVPair<String, Rectangle> rectangle7;
+    private KVPair<String, Rectangle> rectangle8;
+    private KVPair<String, Rectangle> rectangle9;
+    private KVPair<String, Rectangle> rectangle10;
+    private KVPair<String, Rectangle> rectangle11;
+    private KVPair<String, Rectangle> rectangle12;
+    private KVPair<String, Rectangle> rectangle13;
+    private KVPair<String, Rectangle> rectangle14;
+    private KVPair<String, Rectangle> rectangle15;
+    private KVPair<String, Rectangle> rectangle16;
+    private KVPair<String, Rectangle> rectangle17;
+    private KVPair<String, Rectangle> rectangle18;
 
     /**
      * Set up variables used in testing
@@ -27,6 +47,43 @@ public class DatabaseTest extends TestCase {
         r2 = new Rectangle(-1, -1, 2, 4);
         p2 = new KVPair<String, Rectangle>("b", r2);
         list2 = new Database();
+        tests = new ArrayList<KVPair<String, Rectangle>>();
+        rectangle1 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0, 0,
+            0)); // Reject
+        rectangle2 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0, 1,
+            0)); // Reject
+        rectangle3 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0, 0,
+            1)); // Reject
+        rectangle4 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0, 1,
+            1)); // Accept
+        rectangle5 = new KVPair<String, Rectangle>("a", new Rectangle(-1, 0, 1,
+            1)); // Reject
+        rectangle6 = new KVPair<String, Rectangle>("a", new Rectangle(0, -1, 1,
+            1)); // Reject
+        rectangle7 = new KVPair<String, Rectangle>("a", new Rectangle(-1, -1, 1,
+            1)); // Reject
+        rectangle8 = new KVPair<String, Rectangle>("a", new Rectangle(500, 500,
+            600, 500)); // Reject
+        rectangle9 = new KVPair<String, Rectangle>("a", new Rectangle(500, 500,
+            500, 600)); // Reject
+        rectangle10 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0, -1,
+            1)); // Reject
+        rectangle11 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0, 1,
+            -1)); // Reject
+        rectangle12 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0, -1,
+            -1)); // Reject
+        rectangle13 = new KVPair<String, Rectangle>("1a", new Rectangle(0, 0, 1,
+            1)); // Reject
+        rectangle14 = new KVPair<String, Rectangle>("_a", new Rectangle(0, 0, 1,
+            1)); // Reject
+        rectangle15 = new KVPair<String, Rectangle>(" a", new Rectangle(0, 0, 1,
+            1)); // Reject
+        rectangle16 = new KVPair<String, Rectangle>("@a", new Rectangle(0, 0, 1,
+            1)); // Reject
+        rectangle17 = new KVPair<String, Rectangle>("a", new Rectangle(0, 0,
+            1024, 1024)); // Accept
+        rectangle18 = new KVPair<String, Rectangle>("a", new Rectangle(1, 1,
+            1023, 1023)); // Accept
 
     }
 
@@ -40,6 +97,97 @@ public class DatabaseTest extends TestCase {
         assertEquals(systemOut().getHistory(),
             "Rectangle inserted: (a, 1, 0, 2, 4)\n"
                 + "Rectangle rejected: (b, -1, -1, 2, 4)\n");
+        systemOut().clearHistory();
+
+        list.insert(rectangle1);
+        assertFuzzyEquals("Rectangle rejected: (a, 0, 0, 0, 0)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle2);
+        assertFuzzyEquals("Rectangle rejected: (a, 0, 0, 1, 0)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle3);
+        assertFuzzyEquals("Rectangle rejected: (a, 0, 0, 0, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle4);
+        assertFuzzyEquals("Rectangle inserted: (a, 0, 0, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle5);
+        assertFuzzyEquals("Rectangle rejected: (a, -1, 0, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle6);
+        assertFuzzyEquals("Rectangle rejected: (a, 0, -1, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle7);
+        assertFuzzyEquals("Rectangle rejected: (a, -1, -1, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle8);
+        assertFuzzyEquals("Rectangle rejected: (a, 500, 500, 600, 500)\n",
+            systemOut().getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle9);
+        assertFuzzyEquals("Rectangle rejected: (a, 500, 500, 500, 600)\n",
+            systemOut().getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle10);
+        assertFuzzyEquals("Rectangle rejected: (a, 0, 0, -1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle11);
+        assertFuzzyEquals("Rectangle rejected: (a, 0, 0, 1, -1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle12);
+        assertFuzzyEquals("Rectangle rejected: (a, 0, 0, -1, -1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle13);
+        assertFuzzyEquals("Rectangle rejected: (1a, 0, 0, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle14);
+        assertFuzzyEquals("Rectangle rejected: (_a, 0, 0, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle15);
+        assertFuzzyEquals("Rectangle rejected: ( a, 0, 0, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle16);
+        assertFuzzyEquals("Rectangle rejected: (@a, 0, 0, 1, 1)\n", systemOut()
+            .getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle17);
+        assertFuzzyEquals("Rectangle inserted: (a, 0, 0, 1024, 1024)\n",
+            systemOut().getHistory());
+        systemOut().clearHistory();
+
+        list.insert(rectangle18);
+        assertFuzzyEquals("Rectangle inserted: (a, 1, 1, 1023, 1023)\n",
+            systemOut().getHistory());
+        systemOut().clearHistory();
     }
 
 

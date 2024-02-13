@@ -16,7 +16,7 @@ public class Rectangle {
     // the distance from the y coordinate the rectangle spans
     private int height;
 
-    private static final int WORLD_BOX = 1023;
+    private static final int WORLD_BOX = 1024;
 
     /**
      * Creates an object with the values to the parameters given in the

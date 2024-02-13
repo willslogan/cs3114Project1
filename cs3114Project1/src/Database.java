@@ -55,7 +55,14 @@ public class Database {
         // writing the correct message to the console from
         // that
         Rectangle currentRec = pair.getValue();
-        if (currentRec.isInvalid()) {
+        // Add case here if empty string is possible
+        // valid string is being used.
+        char firstChar = pair.getKey().charAt(0);
+        if (!Character.isLetter(firstChar)) {
+            System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
+                + currentRec.toString() + ")");
+        }
+        else if (currentRec.isInvalid()) {
             System.out.println("Rectangle rejected: (" + pair.getKey() + ", "
                 + currentRec.toString() + ")");
         }

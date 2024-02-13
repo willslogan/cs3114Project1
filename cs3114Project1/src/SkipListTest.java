@@ -136,32 +136,81 @@ public class SkipListTest extends TestCase {
         actual = test1.search("r2");
         assertNull(actual);
 
-        // test 2 test where first rec is lower level than secon
+        // Test 2 one item in list
+        expected.clear();
+        test1.insert(listRecs[1]);
+        actual = test1.search("r2");
+        expected.add(listRecs[1]);
+        assertEquals(expected, actual);
+
+        // Test 2.5 a
+        expected.clear();
+        test1.insert(listRecs[0]);
+        actual = test1.search("r1");
+        expected.add(listRecs[0]);
+        assertEquals(expected, actual);
+
+        // Test 2.5 b
+        expected.clear();
+        actual = test1.search("r2");
+        expected.add(listRecs[1]);
+        assertEquals(expected, actual);
+
+        // test 3 test where first rec is lower level than secon
+        expected.clear();
+        test1 = new SkipList<String, Rectangle>();
         test1.insert(listRecs[0]);
         test1.insert(listRecs[1]);
         test1.insert(listRecs[1]);
+        test1.dump();
         expected.add(listRecs[1]);
         expected.add(listRecs[1]);
         actual = test1.search("r2");
         assertEquals(expected, actual);
 
-        // test 3 test where rec is at end of list
-        test1.insert(listRecs[2]);
+        // test 4 test where rec is at end of list
         expected.clear();
+        test1.insert(listRecs[2]);
         expected.add(listRecs[2]);
         actual = test1.search("r3");
         assertEquals(expected, actual);
 
-        // test 4 test where rec is first item
+        // test 5 test where rec is first item
         expected.clear();
         actual = test1.search("r1");
         expected.add(listRecs[0]);
         assertEquals(expected, actual);
 
-        // test 5 item isn't in list
+        // test 6 item isn't in list
         expected.clear();
         actual = test1.search("x5");
         assertNull(actual);
+
+        // Test 7
+        expected.clear();
+        test1.insert(listRecs[6]);
+        test1.insert(listRecs[7]);
+        test1.insert(listRecs[7]);
+        test1.insert(listRecs[5]);
+        actual = test1.search("a6");
+        expected.add(listRecs[5]);
+        assertEquals(expected, actual);
+        System.out.println("==============================");
+        test1.dump();
+        System.out.println("==============================");
+
+        // Test 8
+        expected.clear();
+        actual = test1.search("a7");
+        expected.add(listRecs[6]);
+        assertEquals(expected, actual);
+
+        // Test 9
+        expected.clear();
+        actual = test1.search("a8");
+        expected.add(listRecs[7]);
+        expected.add(listRecs[7]);
+        assertEquals(expected, actual);
 
     }
 
@@ -170,10 +219,6 @@ public class SkipListTest extends TestCase {
      * Test remove by name
      */
     public void testRemove() {
-// for (int i = 0; i < 20; i++) {
-// System.out.println(test1.randomLevel());
-// }
-
         // levels for random seed order
         // 4,0,5,1,4,0,1,4,0,0
 
@@ -258,7 +303,7 @@ public class SkipListTest extends TestCase {
 
 
     /**
-     * Test removebyvlaue
+     * Test removeByValue
      */
     public void testRemoveByValue() {
         assertNull(test1.removeByValue(listRecs[0].getValue()));
@@ -300,4 +345,7 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
             + "\nSkipList size is: 2", systemOut().getHistory());
     }
+ // for (int i = 0; i < 20; i++) {
+ // System.out.println(test1.randomLevel());
+ // }
 }
