@@ -195,9 +195,7 @@ public class SkipListTest extends TestCase {
         actual = test1.search("a6");
         expected.add(listRecs[5]);
         assertEquals(expected, actual);
-        System.out.println("==============================");
         test1.dump();
-        System.out.println("==============================");
 
         // Test 8
         expected.clear();
@@ -263,7 +261,6 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 4, Value (r4, 20, 20, 10, 10)"
             + "\nSkipList size is: 4", systemOut().getHistory());
         assertEquals(listRecs[3], test1.remove("r4"));
-
         systemOut().clearHistory();
         test1.dump();
         assertFuzzyEquals("SkipList dump:" + "\nNode with depth 5, Value null"
@@ -345,7 +342,4 @@ public class SkipListTest extends TestCase {
             + "\nNode with depth 0, Value (r2, 1, 1, 5, 10)"
             + "\nSkipList size is: 2", systemOut().getHistory());
     }
- // for (int i = 0; i < 20; i++) {
- // System.out.println(test1.randomLevel());
- // }
 }

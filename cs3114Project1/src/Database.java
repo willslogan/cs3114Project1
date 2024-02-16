@@ -90,7 +90,7 @@ public class Database {
         // Rectangle was found and successfully removed from the list
         if (tempKV != null) {
             System.out.println("Rectangle removed: (" + name + ", " + tempKV
-                .getValue().toString().toString() + ")");
+                .getValue().toString() + ")");
         }
 
         // Rectangle with specified rectangle doesn't exist within the list
@@ -240,7 +240,7 @@ public class Database {
             for (int i = 0; i < results.size(); i++) {
                 // temp variable so it less writing
                 Rectangle currentRec = results.get(i).getValue();
-                System.out.println("(" + name + " " + currentRec.toString()
+                System.out.println("(" + name + ", " + currentRec.toString()
                     + ")");
             }
         }

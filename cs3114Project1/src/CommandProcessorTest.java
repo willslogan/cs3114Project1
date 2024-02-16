@@ -97,4 +97,5 @@ public class CommandProcessorTest extends TestCase {
         cmdProc.processor(unrecognized);
         assertEquals(systemOut().getHistory(), "Unrecognized command.\n");
     }
+
 }
